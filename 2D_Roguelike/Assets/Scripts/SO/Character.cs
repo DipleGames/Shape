@@ -10,6 +10,12 @@ public class Character : ScriptableObject
     public float baseHp;
     public float baseMp;
     public float baseSpeed;
-    public float exp;
+    public float baseAttack;
+
+    [Header("레벨 / 경험치")]
     public int level;
+    public float exp;
+
+    [Header("평타 OBJ")]
+    public GameObject aaObj; 
 }

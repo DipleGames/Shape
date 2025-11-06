@@ -94,6 +94,7 @@ GameObject:
   - component: {fileID: 1766114690779368094}
   - component: {fileID: 7198665747582582701}
   - component: {fileID: 4438488538846662683}
+  - component: {fileID: 8467021608376094219}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -257,10 +258,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c311ca46856c9254f9e5b123fedb7419, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stats: {fileID: 7198665747582582701}
+  playerStats: {fileID: 7198665747582582701}
   _hp: 0
   _mp: 0
-  playerStats: {fileID: 7198665747582582701}
 --- !u!114 &1766114690779368094
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -289,9 +289,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   character: {fileID: 0}
   statCalc: {fileID: 4438488538846662683}
-  _maxHp: 0
-  _maxMp: 0
-  _speed: 0
+  _stat:
+    MaxHp: 0
+    MaxMp: 0
+    Attack: 0
+    Speed: 0
 --- !u!114 &4438488538846662683
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -305,3 +307,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelSystem: {fileID: 1766114690779368094}
+--- !u!114 &8467021608376094219
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5630087314721585141}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 469b79448442c1742ae88f43a9538ede, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  aaPool:
+    aaObjPrefab: {fileID: 0}
+    size: 32
+    expandable: 1

@@ -1,10 +1,11 @@
 using UnityEngine;
 using System;
 
+[DefaultExecutionOrder(-30)]
 public class PlayerController : MonoBehaviour
 {
     public PlayerStats playerStats;
-    
+
     // ===== 이동 지점 =====
     public Vector3 targetPoint { get; private set; }
 
@@ -14,16 +15,15 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float _hp;
     [SerializeField] private float _mp;
 
-    public event Action<float, float> OnHpChanged;
-    public event Action<float, float> OnMpChanged;
+    public event Action<float, float> OnHpChanged, OnMpChanged;
 
     public float Hp
     {
         get => _hp;
         set
         {
-            float max = playerStats ? playerStats.MaxHp : Mathf.Infinity;
-            float nv  = Mathf.Clamp(value, 0f, max);
+            float max = playerStats ? playerStats.Stat.MaxHp : Mathf.Infinity;
+            float nv = Mathf.Clamp(value, 0f, max);
             if (Mathf.Approximately(_hp, nv)) return;
             float ov = _hp;
             _hp = nv;
@@ -37,7 +37,7 @@ public class PlayerController : MonoBehaviour
         get => _mp;
         set
         {
-            float max = playerStats ? playerStats.MaxMp : Mathf.Infinity;
+            float max = playerStats ? playerStats.Stat.MaxMp : Mathf.Infinity;
             float nv = Mathf.Clamp(value, 0f, max);
             if (Mathf.Approximately(_mp, nv)) return;
             float ov = _mp;
@@ -46,13 +46,19 @@ public class PlayerController : MonoBehaviour
         }
     }
     #endregion
-    
+
     void Awake()
     {
         playerStats.statCalc.OnDefaultCalculated += OnInitialize; // 1. 캐릭터 선택시 "스텟 계산기"에서 기초 스텟을 적용한 뒤 현재 체력(풀피) 현재 마나(풀마나) 반영
     }
 
+    void Start()
+    {
+        playerStats = PlayerManager.Instance.playerStats;
+    }
 
+
+    KeyCode key = KeyCode.None;
     void Update()
     {
         if (Input.GetMouseButtonDown(1))
@@ -63,13 +69,35 @@ public class PlayerController : MonoBehaviour
             PlayerManager.Instance.spriteRenderer.flipX = transform.position.x < targetPoint.x;
         }
 
-        transform.position = Vector3.MoveTowards(transform.position, targetPoint, playerStats.Speed * Time.deltaTime);
+        if (Input.GetKeyDown(KeyCode.A)) key = KeyCode.A;
+        else if (Input.GetKeyDown(KeyCode.Q)) key = KeyCode.Q;
+        else if (Input.GetKeyDown(KeyCode.W)) key = KeyCode.W;
+        else if (Input.GetKeyDown(KeyCode.E)) key = KeyCode.E;
+        else if (Input.GetKeyDown(KeyCode.R)) key = KeyCode.R;
+        
+        switch (key)
+        {
+            case KeyCode.A:
+                PlayerManager.Instance.battleSystem.autoAttack.AA();
+                break;
+            case KeyCode.Q:
+                break;
+            case KeyCode.W:
+                break;
+            case KeyCode.E:
+                break;
+            case KeyCode.R:
+                break;
+        }
+
+        transform.position = Vector3.MoveTowards(transform.position, targetPoint, playerStats.Stat.Speed * Time.deltaTime);
+        key = KeyCode.None; // ← 매 프레임 끝에 리셋
     }
 
-    void OnInitialize()
+    void OnInitialize(Stat newStat)
     {
-        Hp = playerStats.MaxHp;
-        Mp = playerStats.MaxMp;
+        Hp = newStat.MaxHp;
+        Mp = newStat.MaxMp;
     }
 
     public void Die()

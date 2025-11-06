@@ -15,6 +15,8 @@ MonoBehaviour:
   sprite: {fileID: 21300000, guid: 38139f3dfcee99f4da5b77fed566505f, type: 3}
   baseHp: 20
   baseMp: 20
-  baseSpeed: 20
-  exp: 0
+  baseSpeed: 5
+  baseAttack: 5
   level: 0
+  exp: 0
+  aaObj: {fileID: 8623997000863016169, guid: d547b417a30ae71488eaf7698feea0ef, type: 3}
