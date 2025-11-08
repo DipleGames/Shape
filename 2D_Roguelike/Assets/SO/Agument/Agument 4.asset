@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 047646ae9c5d602458daf51bb10d242e, type: 3}
   m_Name: Agument 4
   m_EditorClassIdentifier: 
-  agumentName: "\uC99D\uAC155"
+  agumentName: "\uB4DC\uB808\uC778 \uC601\uC5ED"
   agumentDesc: "\uB2E4\uC12F\uBC88\uC9F8 \uC99D\uAC15"
-  value: 0.03
+  statType: 4
+  operationType: 1
+  value: 0.1

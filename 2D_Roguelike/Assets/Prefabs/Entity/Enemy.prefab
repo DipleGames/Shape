@@ -335,7 +335,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 3
   m_TargetDisplay: 0
 --- !u!114 &8130409463946429460
 MonoBehaviour:
@@ -557,3 +557,4 @@ MonoBehaviour:
   enemy: {fileID: 0}
   _enemyMaxHp: 0
   enemySpeed: 0
+  _delay: 1

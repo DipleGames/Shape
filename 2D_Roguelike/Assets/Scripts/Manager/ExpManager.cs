@@ -5,23 +5,23 @@ using System.Collections.Generic;
 public class ExpManager : SingleTon<ExpManager>
 {
     [Header("expPool")]
-    [SerializeField] private GameObject expPrefab;
-    [SerializeField] private int size = 256;
-    public Queue<GameObject> _expPool = new();
+    [SerializeField] private GameObject _expPrefab;
+    [SerializeField] private int _size = 256;
+    public Queue<GameObject> expPool = new();
 
     void Start()
     {
-        for (int i = 0; i < size; i++)
+        for (int i = 0; i < _size; i++)
         {
-            var go = Instantiate(expPrefab, transform);
+            var go = Instantiate(_expPrefab, transform);
             go.SetActive(false);
-            _expPool.Enqueue(go);
+            expPool.Enqueue(go);
         }
     }
 
     public GameObject GetExp()
     {
-        var go = _expPool.Dequeue();
+        var go = expPool.Dequeue();
         go.SetActive(true);
         return go;
     }
@@ -30,6 +30,6 @@ public class ExpManager : SingleTon<ExpManager>
     {
         go.SetActive(false);
         go.transform.SetParent(transform);
-        _expPool.Enqueue(go);
+        expPool.Enqueue(go);
     }
 }

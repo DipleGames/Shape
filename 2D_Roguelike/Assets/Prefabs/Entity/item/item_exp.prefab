@@ -103,7 +103,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   value: 100
-  speed: 7
+  speed: 10
   isDrainArea: 0
 --- !u!58 &7828913221380079335
 CircleCollider2D:

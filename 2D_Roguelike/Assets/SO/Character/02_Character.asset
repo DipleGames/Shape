@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: 02_Character
   m_EditorClassIdentifier: 
   sprite: {fileID: 21300000, guid: 38139f3dfcee99f4da5b77fed566505f, type: 3}
-  baseHp: 20
-  baseMp: 20
+  baseHp: 150
+  baseMp: 150
   baseSpeed: 5
-  baseAttack: 5
+  baseAttack: 7
   drainArea: 1.5
   aaObj: {fileID: 8623997000863016169, guid: d547b417a30ae71488eaf7698feea0ef, type: 3}

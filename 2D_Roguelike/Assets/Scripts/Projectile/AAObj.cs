@@ -31,7 +31,7 @@ public class AAObj : MonoBehaviour
     {
         if (!collision.CompareTag("Enemy")) return;
 
-        float damage = PlayerManager.Instance.playerStats.Stat.Attack;
+        float damage = PlayerManager.Instance.playerStat.stat[StatType.Attack];
         var enemyController = collision.GetComponent<EnemyController>();
         enemyController.TakeDamage(damage);
         Debug.Log($"{damage}를 입혀서 {enemyController.EnemyMaxHP}가남음");

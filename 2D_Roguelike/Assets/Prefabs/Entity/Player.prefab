@@ -290,12 +290,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pm: {fileID: 0}
-  _stat:
-    MaxHp: 0
-    MaxMp: 0
-    Attack: 0
-    Speed: 0
-    DrainArea: 0
+  _statList: []
 --- !u!114 &4438488538846662683
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -309,12 +304,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pm: {fileID: 0}
-  s:
-    MaxHp: 0
-    MaxMp: 0
-    Attack: 0
-    Speed: 0
-    DrainArea: 0
 --- !u!114 &8467021608376094219
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -328,8 +317,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   aaPool:
-    aaObjPrefab: {fileID: 0}
-    size: 32
+    _aaObjPrefab: {fileID: 0}
+    _size: 0
     expandable: 1
 --- !u!1 &6899550604180109525
 GameObject:
@@ -412,4 +401,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f90e25c32b1372439d45e30d8d35e44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cc: {fileID: 4022444413803824147}
+  _cc: {fileID: 4022444413803824147}

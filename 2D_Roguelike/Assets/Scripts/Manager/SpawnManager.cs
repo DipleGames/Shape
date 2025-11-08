@@ -10,21 +10,21 @@ public class SpawnManager : SingleTon<SpawnManager>
     public Transform playerTr;
 
     [Header("타켓 카메라")]
-    [SerializeField] private Camera targetCamera;
-    [SerializeField, Range(0f, 0.5f)] private float outOfViewMargin = 0.05f; // 카메라 바깥 판정 마진
+    [SerializeField] private Camera _targetCamera;
+    [SerializeField, Range(0f, 0.5f)] private float _outOfViewMargin = 0.05f; // 카메라 바깥 판정 마진
 
     [Header("Spawn Control")]
-    [SerializeField] private float spawnInterval = 1.25f;
-    [SerializeField] private int maxAlive = 40;           // 동시에 살아있을 최대 수
+    [SerializeField] private float _spawnInterval = 1.25f;
+    [SerializeField] private int _maxAlive = 40;           // 동시에 살아있을 최대 수
 
 
     [Header("Spawn Ring (player-centric)")]
-    [SerializeField] private float minSpawnDistance;  // 플레이어로부터 최소거리
-    [SerializeField] private float maxSpawnDistance;  // 최대거리
+    [SerializeField] private float _minSpawnDistance;  // 플레이어로부터 최소거리
+    [SerializeField] private float _maxSpawnDistance;  // 최대거리
 
 
     [Header("Enemy Pools")]
-    [SerializeField] private EnemyPoolConfig[] enemyGroups; // 프리팹/초기수 설정
+    [SerializeField] private EnemyPoolConfig[] _enemyGroups; // 프리팹/초기수 설정
 
 
     private readonly List<EnemyPool> _pools = new();
@@ -33,7 +33,7 @@ public class SpawnManager : SingleTon<SpawnManager>
     protected override void Awake()
     {
         base.Awake();
-        if (targetCamera == null) targetCamera = Camera.main;
+        if (_targetCamera == null) _targetCamera = Camera.main;
         BuildPools();
         SpawnPlayer();
         StartCoroutine(SpawnLoop());
@@ -102,7 +102,7 @@ public class SpawnManager : SingleTon<SpawnManager>
     private void BuildPools()
     {
         _pools.Clear();
-        foreach (var cfg in enemyGroups)
+        foreach (var cfg in _enemyGroups)
         {
             if (cfg.prefab == null) continue;
             _pools.Add(new EnemyPool(cfg.prefab, Mathf.Max(0, cfg.initialSize), Mathf.Max(cfg.initialSize, cfg.maxSize), this.transform));
@@ -125,10 +125,10 @@ public class SpawnManager : SingleTon<SpawnManager>
         // 플레이어 준비 대기
         while (playerTr == null) yield return null;
 
-        var wait = new WaitForSeconds(spawnInterval);
+        var wait = new WaitForSeconds(_spawnInterval);
         while (true)
         {
-            if (_alive < maxAlive)
+            if (_alive < _maxAlive)
             {
                 TrySpawnEnemy();
             }
@@ -154,7 +154,7 @@ public class SpawnManager : SingleTon<SpawnManager>
         for (int i = 0; i < MAX_TRIES; i++)
         {
             var dir = Random.insideUnitCircle.normalized;
-            float dist = Random.Range(minSpawnDistance, maxSpawnDistance);
+            float dist = Random.Range(_minSpawnDistance, _maxSpawnDistance);
             var cand2 = (Vector2)playerTr.position + dir * dist;
             var candidate = new Vector3(cand2.x, cand2.y, 0f);
 
@@ -196,12 +196,12 @@ public class SpawnManager : SingleTon<SpawnManager>
 
     private bool IsOutsideCameraView(Vector3 worldPos)
     {
-        if (targetCamera == null) return true; // 카메라 없으면 그냥 허용
-        var v = targetCamera.WorldToViewportPoint(worldPos);
+        if (_targetCamera == null) return true; // 카메라 없으면 그냥 허용
+        var v = _targetCamera.WorldToViewportPoint(worldPos);
         // z < 0 (카메라 뒤)도 ‘밖’으로 취급
         if (v.z < 0f) return true;
         // 뷰포트 박스 (0~1) 밖(마진 포함)인지
-        float m = outOfViewMargin;
+        float m = _outOfViewMargin;
         return (v.x < -m || v.x > 1f + m || v.y < -m || v.y > 1f + m);
     }
 
@@ -265,24 +265,24 @@ public class SpawnManager : SingleTon<SpawnManager>
         if (playerTr != null)
         {
             Gizmos.color = colRingMin;
-            Gizmos.DrawWireSphere(playerTr.position, minSpawnDistance);
+            Gizmos.DrawWireSphere(playerTr.position, _minSpawnDistance);
 
             Gizmos.color = colRingMax;
-            Gizmos.DrawWireSphere(playerTr.position, maxSpawnDistance);
+            Gizmos.DrawWireSphere(playerTr.position, _maxSpawnDistance);
         }
 
         // 2) 카메라 뷰포트 사각형 (마진 포함)
-        if (targetCamera != null)
+        if (_targetCamera != null)
         {
             // z깊이: 카메라→그려줄 평면까지의 거리 (2D라면 보통 player z 또는 0 기준)
             float refZ = playerTr != null ? playerTr.position.z : 0f;
-            float depth = refZ - targetCamera.transform.position.z;
+            float depth = refZ - _targetCamera.transform.position.z;
 
-            float m = outOfViewMargin;
-            Vector3 bl = targetCamera.ViewportToWorldPoint(new Vector3(0f - m, 0f - m, depth));
-            Vector3 tl = targetCamera.ViewportToWorldPoint(new Vector3(0f - m, 1f + m, depth));
-            Vector3 tr = targetCamera.ViewportToWorldPoint(new Vector3(1f + m, 1f + m, depth));
-            Vector3 br = targetCamera.ViewportToWorldPoint(new Vector3(1f + m, 0f - m, depth));
+            float m = _outOfViewMargin;
+            Vector3 bl = _targetCamera.ViewportToWorldPoint(new Vector3(0f - m, 0f - m, depth));
+            Vector3 tl = _targetCamera.ViewportToWorldPoint(new Vector3(0f - m, 1f + m, depth));
+            Vector3 tr = _targetCamera.ViewportToWorldPoint(new Vector3(1f + m, 1f + m, depth));
+            Vector3 br = _targetCamera.ViewportToWorldPoint(new Vector3(1f + m, 0f - m, depth));
 
             Gizmos.color = colCamRect;
             Gizmos.DrawLine(bl, tl);

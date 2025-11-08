@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerManager : SingleTon<PlayerManager> 
 {
     [Header("캐릭터 목록")]
-    [SerializeField] private Character[] characterList;
+    [SerializeField] private Character[] _characterList;
 
 
     [Header("세팅된 플레이어 객체 / 컴퍼넌트")]
@@ -13,7 +13,7 @@ public class PlayerManager : SingleTon<PlayerManager>
     public PlayerController playerController;
     public BattleSystem battleSystem;
     public LevelSystem levelSystem; 
-    public PlayerStats playerStats;
+    public PlayerStat playerStat;
     public StatCalculator statCalculator;
     public Drain drain;
     public SpriteRenderer spriteRenderer;
@@ -30,7 +30,7 @@ public class PlayerManager : SingleTon<PlayerManager>
         playerController = player.GetComponent<PlayerController>();
         battleSystem = player.GetComponent<BattleSystem>();
         levelSystem = player.GetComponent<LevelSystem>();
-        playerStats = player.GetComponent<PlayerStats>();
+        playerStat = player.GetComponent<PlayerStat>();
         statCalculator = player.GetComponent<StatCalculator>();
         drain = player.GetComponentInChildren<Drain>();
         spriteRenderer = player.GetComponent<SpriteRenderer>();
@@ -47,12 +47,12 @@ public class PlayerManager : SingleTon<PlayerManager>
         switch (key)
         {
             case KeyCode.Alpha1:
-                character = characterList[0];
+                character = _characterList[0];
                 InitPlayer(character);
                 break;
 
             case KeyCode.Alpha2:
-                character = characterList[1];
+                character = _characterList[1];
                 InitPlayer(character);
                 break;
         }
@@ -65,6 +65,6 @@ public class PlayerManager : SingleTon<PlayerManager>
         
         statCalculator.DefaultCalculate(); // 기본 스펙 세팅
         battleSystem.aaPool.SetAAPool(character);  // aapool 만들어서 총알장전
-        playerController.FullStatus(playerStats.Stat); // 최초 체력이랑 마나 세팅
+        playerController.OnApplyVital(playerStat.stat); // 최초 체력이랑 마나 세팅
     }
 }

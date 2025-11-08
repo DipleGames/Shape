@@ -1,0 +1,52 @@
+{
+    "version": 1,
+    "name": "UIActions",
+    "maps": [
+        {
+            "name": "Player",
+            "id": "caec4701-1706-481f-aaf1-f30967879852",
+            "actions": [
+                {
+                    "name": "ToggleStat",
+                    "type": "Button",
+                    "id": "57af6ef0-5896-4fef-81b9-d7e810af4ec2",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "76041a61-a543-4b90-bf23-26a9f9bea011",
+                    "path": "<Keyboard>/tab",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ToggleStat",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": [
+        {
+            "name": "PC",
+            "bindingGroup": "PC",
+            "devices": [
+                {
+                    "devicePath": "<Keyboard>",
+                    "isOptional": false,
+                    "isOR": false
+                },
+                {
+                    "devicePath": "<Mouse>",
+                    "isOptional": false,
+                    "isOR": false
+                }
+            ]
+        }
+    ]
+}

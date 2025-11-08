@@ -24,7 +24,7 @@ public class LevelSystem : MonoBehaviour
         _level = 0;
 
         OnRequiredExpChanged += CalculateRequiredExp;
-        OnExpChanged += UIManager.Instance.UpdateUIOnChangePlayerConditon;
+        OnExpChanged += UIManager.Instance.UpdateUIOnChangePlayerVital;
         OnLevelChanged += AgumentManager.Instance.SetAgument; // 증강 세팅
         OnLevelChanged += UIManager.Instance.UpdateUIOnLevelUp; // ui 온
         OnLevelChanged += PlayerManager.Instance.statCalculator.CalculateOnLevelUp; // 레벨이 오르면 스펙 재계산

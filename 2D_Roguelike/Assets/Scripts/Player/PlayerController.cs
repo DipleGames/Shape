@@ -1,6 +1,8 @@
 using UnityEngine;
 using System;
 using UnityEditor.Experimental.GraphView;
+using System.Collections.Generic;
+using Unity.VisualScripting;
 
 [DefaultExecutionOrder(-30)]
 public class PlayerController : MonoBehaviour
@@ -9,7 +11,6 @@ public class PlayerController : MonoBehaviour
 
     // ===== 이동 지점 =====
     public Vector3 targetPoint { get; private set; }
-    Vector3 dir;
 
 
     #region 플레이어 체력 및 마나
@@ -24,7 +25,7 @@ public class PlayerController : MonoBehaviour
         get => _hp;
         set
         {
-            float max = pm.playerStats ? pm.playerStats.Stat.MaxHp : Mathf.Infinity;
+            float max = pm.playerStat ? pm.playerStat.stat[StatType.MaxHp] : Mathf.Infinity;
             float nv = Mathf.Clamp(value, 0f, max);
             if (Mathf.Approximately(_hp, nv)) return;
             float ov = _hp;
@@ -39,7 +40,7 @@ public class PlayerController : MonoBehaviour
         get => _mp;
         set
         {
-            float max = pm.playerStats ? pm.playerStats.Stat.MaxMp : Mathf.Infinity;
+            float max = pm.playerStat ? pm.playerStat.stat[StatType.MaxMp] : Mathf.Infinity;
             float nv = Mathf.Clamp(value, 0f, max);
             if (Mathf.Approximately(_mp, nv)) return;
             float ov = _mp;
@@ -54,8 +55,8 @@ public class PlayerController : MonoBehaviour
     {
         pm = PlayerManager.Instance;
 
-        OnHpChanged += UIManager.Instance.UpdateUIOnChangePlayerConditon;
-        OnMpChanged += UIManager.Instance.UpdateUIOnChangePlayerConditon;
+        OnHpChanged += UIManager.Instance.UpdateUIOnChangePlayerVital;
+        OnMpChanged += UIManager.Instance.UpdateUIOnChangePlayerVital;
     }
 
 
@@ -70,7 +71,9 @@ public class PlayerController : MonoBehaviour
             pm.spriteRenderer.flipX = transform.position.x < targetPoint.x;
         }
 
-        transform.position = Vector3.MoveTowards(transform.position, targetPoint, pm.playerStats.Stat.Speed * Time.deltaTime);
+        if (pm.playerStat == null) return;
+        if (!pm.playerStat.stat.ContainsKey(StatType.Speed)) return;
+        transform.position = Vector3.MoveTowards(transform.position, targetPoint, pm.playerStat.stat[StatType.Speed] * Time.deltaTime);
         
         if (Input.GetKeyDown(KeyCode.A)) key = KeyCode.A;
         else if (Input.GetKeyDown(KeyCode.Q)) key = KeyCode.Q;
@@ -97,14 +100,19 @@ public class PlayerController : MonoBehaviour
     }
 
 
-    public void FullStatus(Stat newStat)
+    public void OnApplyVital(Dictionary<StatType, float> newStat)
     {
-        Hp = newStat.MaxHp;
-        Mp = newStat.MaxMp;
+        Hp = newStat[StatType.MaxHp];
+        Mp = newStat[StatType.MaxMp];
+    }
+
+    public void TakeDamage(float amount)
+    {
+        Hp -= amount;
     }
 
     public void Die()
     {
-        // 사망 처리
+        pm.spriteRenderer.enabled = false;
     }
 }

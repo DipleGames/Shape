@@ -17,23 +17,23 @@ public class BattleSystem : MonoBehaviour
     public class AAPool
     {  
         [Header("Pool Setting")]
-        [SerializeField] private GameObject aaObjPrefab;
-        [SerializeField] private int size;
+        [SerializeField] private GameObject _aaObjPrefab;
+        [SerializeField] private int _size;
         public bool expandable = true;
 
         public Queue<GameObject> _aaPool = new();
 
         public void SetAAPool(Character character)
         {
-            aaObjPrefab = character.aaObj;
+            _aaObjPrefab = character.aaObj;
             BuildPool();
         }
 
         private void BuildPool()
         {
-            for (int i = 0; i < size; i++)
+            for (int i = 0; i < _size; i++)
             {
-                var go = Instantiate(aaObjPrefab, PlayerManager.Instance.transform);
+                var go = Instantiate(_aaObjPrefab, PlayerManager.Instance.transform);
                 go.SetActive(false);
                 _aaPool.Enqueue(go);
             }
@@ -48,9 +48,9 @@ public class BattleSystem : MonoBehaviour
                 return go;
             }
 
-            if (expandable && aaObjPrefab != null)
+            if (expandable && _aaObjPrefab != null)
             {
-                var go = Instantiate(aaObjPrefab, PlayerManager.Instance.transform);
+                var go = Instantiate(_aaObjPrefab, PlayerManager.Instance.transform);
                 go.SetActive(true);
                 return go;
             }

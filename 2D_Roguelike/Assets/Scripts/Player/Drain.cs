@@ -1,18 +1,19 @@
 using Unity.VisualScripting;
 using UnityEngine;
+using System.Collections.Generic;
 
 public class Drain : MonoBehaviour
 {
-    [SerializeField] CircleCollider2D cc;
+    [SerializeField] CircleCollider2D _cc;
 
-    public void ChangeCircleSize(Stat stat)
+    public void ChangeCircleSize(Dictionary<StatType,float> stat)
     {
-        cc.radius = stat.DrainArea;
+        _cc.radius = stat[StatType.DrainArea];
     }
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if(cc.IsTouching(collision))
+        if(_cc.IsTouching(collision))
         {
             if(collision.CompareTag("Exp"))
             {

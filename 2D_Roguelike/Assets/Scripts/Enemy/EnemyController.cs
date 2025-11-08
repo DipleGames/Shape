@@ -27,6 +27,7 @@ public class EnemyController : MonoBehaviour
         }
     }
     public float enemySpeed;
+    [SerializeField] private float _delay = 1f;
 
     public event Action<float, float> OnEnemyHpChanged;
 
@@ -60,12 +61,22 @@ public class EnemyController : MonoBehaviour
     void EnemyAI()
     {
         Move();
+    }
 
-        // 플립
-        if (transform.position.x > target.position.x)
-            spriteRenderer.flipX = true;
-        else
-            spriteRenderer.flipX = false;
+    void OnCollisionStay2D(Collision2D collision)
+    {
+        Attack();
+    }
+
+    float t = 0.9f;
+    void Attack()
+    {
+        t += Time.deltaTime;
+        if(t >= _delay)
+        {
+            PlayerManager.Instance.playerController.TakeDamage(enemy.attackDamage);
+            t = 0f;
+        }
     }
 
     void Move()
@@ -75,6 +86,12 @@ public class EnemyController : MonoBehaviour
 
         // 이동
         rb.linearVelocity = dir * enemySpeed;
+
+            // 플립
+        if (transform.position.x > target.position.x)
+            spriteRenderer.flipX = true;
+        else
+            spriteRenderer.flipX = false;
     }
 
     void UpdateHealthBarUI(float maxHp, float currentHp)
