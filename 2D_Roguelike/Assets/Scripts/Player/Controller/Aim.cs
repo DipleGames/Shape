@@ -31,7 +31,6 @@ public class Aim : MonoBehaviour
     public Vector3 GetAimPos()
     {
         Vector3 aimPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        Debug.Log($"{aimPos}");
         return aimPos;
     }
 }

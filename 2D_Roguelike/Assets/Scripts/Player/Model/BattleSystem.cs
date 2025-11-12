@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,6 +9,7 @@ public class BattleSystem : MonoBehaviour
     [Header("평타 / 스킬")]
     [SerializeField] public AutoAttack autoAttack;
     [SerializeField] public SpecialAttack specialAttack;
+    [SerializeField] public Utile utile;
 
     [Header("AAPool")]
     [SerializeField] public AAPool aaPool;
@@ -73,16 +75,16 @@ public class BattleSystem : MonoBehaviour
     [Serializable] // 평타 로직
     public class AutoAttack
     {
-        Vector3 aim { get; set; }
+        Vector3 _aim { get; set; }
 
         public void AA()
         {
-            var pm = PlayerManager.Instance;
+            PlayerManager pm = PlayerManager.Instance;
             var player = pm.player;
 
             var mp = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            aim = new Vector3(mp.x, mp.y, player.transform.position.z);
-            var dir = (aim - player.transform.position).normalized;
+            _aim = new Vector3(mp.x, mp.y, player.transform.position.z);
+            var dir = (_aim - player.transform.position).normalized;
 
             var go = PlayerManager.Instance.battleSystem.aaPool.Get();
             AAObj aaObj = go.GetComponent<AAObj>();
@@ -100,6 +102,54 @@ public class BattleSystem : MonoBehaviour
     [Serializable] // 스킬 로직
     public class SpecialAttack
     {
+        Vector3 _aim { get; set; }
+    }
 
+    [Serializable]
+    public class Utile
+    {
+        [SerializeField] private Skill dash;          // dash.cooldown 사용
+        [SerializeField] private float _dashDuration = 0.12f;
+        [SerializeField] private float _dashDistance = 2f;
+
+        private bool _isDashing = false;
+        private float _nextDashTime = 0f;     
+        public float DashCooldown => dash.cooldown;
+        public bool CanDash => !_isDashing && Time.time >= _nextDashTime;
+
+        // UI가 읽어갈 값들
+        public float DashRemaining => Mathf.Max(0f, _nextDashTime - Time.time);
+        public float DashNormalized => (DashCooldown > 0f) ? (DashRemaining / DashCooldown) : 0f; // 1→0
+
+        public IEnumerator DashRoutine(Rigidbody2D rb)
+    {
+        if (!CanDash) yield break;
+
+        _isDashing = true;
+        _nextDashTime = Time.time + DashCooldown;
+                
+        // 마우스 방향 계산
+        Vector3 m = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector2 dir = ((Vector2)m - rb.position).normalized;
+
+        Vector2 start = rb.position;
+        Vector2 end = start + dir * _dashDistance;
+
+        float t = 0f;
+        while (t < _dashDuration)
+        {
+            t += Time.fixedDeltaTime;
+            rb.MovePosition(Vector2.Lerp(start, end, t / _dashDuration));
+            yield return new WaitForFixedUpdate();
+        }
+
+        // 실제 물리 위치 기반으로 보정
+        Vector2 actualEnd = rb.position;
+
+        // 플레이어 컨트롤러의 targetPoint를 현재 물리 위치로 세팅
+        PlayerManager.Instance.playerController.targetPoint = new Vector3(actualEnd.x, actualEnd.y, 0f);
+
+        _isDashing = false;
+    }
     }
 }

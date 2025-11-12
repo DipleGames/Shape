@@ -6,6 +6,7 @@ using UnityEngine.Scripting.APIUpdating;
 public class EnemyController : MonoBehaviour
 {
     public Transform target;
+    [SerializeField] private GameObject deathEffectPrefab;
 
     [Header("적 객체")]
     public Enemy enemy;
@@ -34,6 +35,7 @@ public class EnemyController : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private BoxCollider2D boxCollider2D;
     private Slider slider;
+    private Animator anim;
     private Rigidbody2D rb;
 
     void Awake()
@@ -48,6 +50,7 @@ public class EnemyController : MonoBehaviour
         boxCollider2D = GetComponent<BoxCollider2D>();
         rb = GetComponent<Rigidbody2D>();
         slider = GetComponentInChildren<Slider>();
+        anim = anim = GetComponent<Animator>();
         target = GameObject.FindWithTag("Player").transform;
         
         EnemyInit();
@@ -108,13 +111,17 @@ public class EnemyController : MonoBehaviour
     public void TakeDamage(float amount)
     {
         EnemyMaxHP -= amount;
+        anim.SetTrigger("Hit");
     }
     
     void Die()
     {
         var exp = ExpManager.Instance.GetExp();
         exp.transform.position = transform.position;
-        
+        if (deathEffectPrefab != null)
+        {
+            Instantiate(deathEffectPrefab, transform.position, Quaternion.identity);
+        }
         SpawnManager.Instance.Despawn(gameObject);
     }
 }
