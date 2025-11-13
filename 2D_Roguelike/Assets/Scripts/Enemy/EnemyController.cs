@@ -1,7 +1,9 @@
 using UnityEngine;
 using System;
+using System.Collections;
 using UnityEngine.UI;
-using UnityEngine.Scripting.APIUpdating;
+using UnityEditor;
+
 
 public class EnemyController : MonoBehaviour
 {
@@ -113,12 +115,14 @@ public class EnemyController : MonoBehaviour
         EnemyMaxHP -= amount;
         anim.SetTrigger("Hit");
     }
-    
+
     void Die()
     {
         var exp = ExpManager.Instance.GetExp();
         exp.transform.position = transform.position;
-        PoolManager.Instance.deathEffectPools.GetParticleSystem(transform.position);
+        ParticleSystem ps = PoolManager.Instance.deathEffectPools.GetParticleSystem(transform.position);
+        PoolManager.Instance.deathEffectPools.particleQueue.Enqueue(ps); // 생성과 동시에 넣어주기. 근데 왜 disable할때 넣으면 오류나는지 모르겠음.. 트러블슈팅과제
         SpawnManager.Instance.Despawn(gameObject);
     }
+
 }

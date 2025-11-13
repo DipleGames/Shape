@@ -93,7 +93,31 @@ public class PlayerController : MonoBehaviour
         switch (key)
         {
             case KeyCode.A:
-                PlayerManager.Instance.battleSystem.autoAttack.AA();
+                pm.battleSystem.autoAttack.AA();
+                break;
+            case KeyCode.Q:
+                if(UIManager.Instance.skillRuntimeView.Q_skillSlot.skillInstance.TryConsume())
+                {
+                    pm.battleSystem.specialAttack.Q_Skill();
+                }
+                break;
+            case KeyCode.W:
+                if(UIManager.Instance.skillRuntimeView.W_skillSlot.skillInstance.TryConsume())
+                {
+                    pm.battleSystem.specialAttack.W_Skill();
+                }
+                break;
+            case KeyCode.E:
+                if(UIManager.Instance.skillRuntimeView.E_skillSlot.skillInstance.TryConsume())
+                {
+                    pm.battleSystem.specialAttack.E_Skill();
+                }
+                break;
+            case KeyCode.R:
+                if(UIManager.Instance.skillRuntimeView.R_skillSlot.skillInstance.TryConsume())
+                {
+                    pm.battleSystem.specialAttack.R_Skill();
+                }
                 break;
             // QWER 스킬 로직...
         }

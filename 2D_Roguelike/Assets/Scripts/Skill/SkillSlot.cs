@@ -9,19 +9,12 @@ public class SkillSlot : MonoBehaviour
     [Header("스킬 정보 SO")]
     public Skill skill;
     public Image icon;
-    void Awake()
-    {
-        InitSkillInstance();
-    }
 
-    void Start()
-    {
-        icon = GetComponentInChildren<Image>();
-        icon.sprite = skill.skillIcon;
-    }
 
-    void InitSkillInstance()
+    public void InitSkill()
     {
         skillInstance = new SkillInstance { skill = skill };
+        icon = GetComponentInChildren<Image>();
+        icon.sprite = skill.skillIcon;
     }
 }

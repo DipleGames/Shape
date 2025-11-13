@@ -3,6 +3,8 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Character", menuName="Player/character")]
 public class Character : ScriptableObject
 {
+    public int characterNumber;
+
     [Header("캐릭터 스프라이트")]
     public Sprite sprite;
 
@@ -16,7 +18,13 @@ public class Character : ScriptableObject
     public float drainArea = 1.5f;
 
 
-
     [Header("평타 OBJ")]
-    public GameObject aaObj; 
+    public GameObject aaObj;
+
+    [Header("스킬 셋")]
+    public Skill D_Skill;
+    public Skill Q_Skill;
+    public Skill W_Skill;
+    public Skill E_Skill;
+    public Skill R_Skill;
 }

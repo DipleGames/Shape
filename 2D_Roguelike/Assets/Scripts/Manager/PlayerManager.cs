@@ -71,7 +71,8 @@ public class PlayerManager : SingleTon<PlayerManager>
     public void InitPlayer(Character character)
     {
         spriteRenderer.sprite = character.sprite; // 캐릭터 이미지 세팅하고
-        
+
+        SkillRuntimeView.Instance.SetSkill(character); // 스킬 세팅
         statCalculator.DefaultCalculate(); // 기본 스펙 세팅
         battleSystem.aaPool.SetAAPool(character);  // aapool 만들어서 총알장전
         playerController.OnApplyVital(playerStat.stat); // 최초 체력이랑 마나 세팅

@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8cb7411c56938e346b7e7d6f46ad63db, type: 3}
   m_Name: SO_Character.02
   m_EditorClassIdentifier: 
+  characterNumber: 2
   sprite: {fileID: 21300000, guid: f41d5a86cfed7e84991a3bb877d69c55, type: 3}
   baseHp: 150
   baseMp: 150
@@ -19,3 +20,8 @@ MonoBehaviour:
   baseAttack: 7
   drainArea: 1.5
   aaObj: {fileID: 8623997000863016169, guid: d547b417a30ae71488eaf7698feea0ef, type: 3}
+  D_Skill: {fileID: 0}
+  Q_Skill: {fileID: 0}
+  W_Skill: {fileID: 0}
+  E_Skill: {fileID: 0}
+  R_Skill: {fileID: 0}

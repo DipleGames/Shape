@@ -103,6 +103,26 @@ public class BattleSystem : MonoBehaviour
     public class SpecialAttack
     {
         Vector3 _aim { get; set; }
+
+        public void Q_Skill()
+        {
+            Debug.Log("Q스킬 실행");
+        }
+
+        public void W_Skill()
+        {
+            Debug.Log("W스킬 실행");
+        }
+
+        public void E_Skill()
+        {
+            Debug.Log("E스킬 실행");
+        }
+        
+        public void R_Skill()
+        {
+            Debug.Log("R스킬 실행");
+        }
     }
 
     [Serializable]
