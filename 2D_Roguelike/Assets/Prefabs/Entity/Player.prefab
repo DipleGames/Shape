@@ -313,12 +313,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   utile:
-    _dash: {fileID: 11400000, guid: beec3f752fd849041a1dc994cc1aea67, type: 2}
     _dashDuration: 0.1
     _dashDistance: 15
   aaPool:
     _aaObjPrefab: {fileID: 0}
-    _size: 0
+    _size: 32
     expandable: 1
 --- !u!114 &2292883768651051298
 MonoBehaviour:

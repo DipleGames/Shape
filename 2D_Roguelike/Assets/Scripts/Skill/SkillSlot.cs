@@ -10,11 +10,14 @@ public class SkillSlot : MonoBehaviour
     public Skill skill;
     public Image icon;
 
+    void Awake()
+    {
+        icon = GetComponentInChildren<Image>();
+    }
 
     public void InitSkill()
     {
         skillInstance = new SkillInstance { skill = skill };
-        icon = GetComponentInChildren<Image>();
-        icon.sprite = skill.skillIcon;
+        icon.sprite = skill.skillDefinition.skillIcon;
     }
 }

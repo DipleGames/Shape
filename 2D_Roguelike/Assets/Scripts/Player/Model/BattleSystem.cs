@@ -6,15 +6,35 @@ using UnityEngine;
 [DefaultExecutionOrder(-20)]
 public class BattleSystem : MonoBehaviour
 {
-    [Header("평타 / 스킬")]
+    [Header("평타 / 유틸")]
     [SerializeField] public AutoAttack autoAttack;
-    [SerializeField] public SpecialAttack specialAttack;
     [SerializeField] public Utile utile;
 
+    // 스킬 실행기
+    public void SkillExecutor(Skill skill)
+    {
+        if( PlayerManager.Instance.playerController.Mp < skill.manaCost) return; // 마나부족하면 리턴
+
+        int actionLenght = skill.actions.Length;
+        Vector3 m = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector3 tgt = new Vector3(m.x, m.y, 0f);
+        SkillContext ctx = new SkillContext
+        {
+            caster = gameObject,
+            castOrigin = gameObject.transform.position,
+            targetPoint = tgt
+        };
+        PlayerManager.Instance.playerController.Mp -= skill.manaCost;
+        for(int i=0; i<actionLenght; i++)
+        {
+            StartCoroutine(skill.actions[i].action.Execute(ctx, skill.actions[i].parameters));
+        }
+    }
+
+    #region AA
     [Header("AAPool")]
     [SerializeField] public AAPool aaPool;
 
-    #region AAPool
     [Serializable]
     public class AAPool
     {  
@@ -77,21 +97,19 @@ public class BattleSystem : MonoBehaviour
     {
         Vector3 _aim { get; set; }
 
-        public void AA()
+        public void AA(PlayerManager pm)
         {
-            PlayerManager pm = PlayerManager.Instance;
             var player = pm.player;
 
             var mp = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             _aim = new Vector3(mp.x, mp.y, player.transform.position.z);
             var dir = (_aim - player.transform.position).normalized;
 
-            var go = PlayerManager.Instance.battleSystem.aaPool.Get();
-            AAObj aaObj = go.GetComponent<AAObj>();
-
+            var go = pm.battleSystem.aaPool.Get();
+            AAProj aaObj = go.GetComponent<AAProj>();
+            aaObj.InitAAProj(pm.battleSystem.aaPool, dir);
+            
             go.transform.position = player.transform.position;
-
-            aaObj.dir = dir;
 
             float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
             go.transform.rotation = Quaternion.Euler(0f, 0f, angle);
@@ -99,31 +117,6 @@ public class BattleSystem : MonoBehaviour
 
     }
 
-    [Serializable] // 스킬 로직
-    public class SpecialAttack
-    {
-        Vector3 _aim { get; set; }
-
-        public void Q_Skill()
-        {
-            Debug.Log("Q스킬 실행");
-        }
-
-        public void W_Skill()
-        {
-            Debug.Log("W스킬 실행");
-        }
-
-        public void E_Skill()
-        {
-            Debug.Log("E스킬 실행");
-        }
-        
-        public void R_Skill()
-        {
-            Debug.Log("R스킬 실행");
-        }
-    }
 
     [Serializable]
     public class Utile

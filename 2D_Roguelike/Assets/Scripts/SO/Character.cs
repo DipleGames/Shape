@@ -3,7 +3,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Character", menuName="Player/character")]
 public class Character : ScriptableObject
 {
-    public int characterNumber;
+    public int characterId;
 
     [Header("캐릭터 스프라이트")]
     public Sprite sprite;
