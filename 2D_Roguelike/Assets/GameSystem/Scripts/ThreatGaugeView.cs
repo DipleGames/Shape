@@ -1,16 +1,12 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ThreatGaugeView : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+    [SerializeField] private Slider _threatGaugeBar;
 
-    // Update is called once per frame
-    void Update()
+    public void OnUpdateThreatGauge(float threatGuage)
     {
-        
+        _threatGaugeBar.value = threatGuage / GameManager.Instance.MaxThreatGuage;
     }
 }

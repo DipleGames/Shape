@@ -4,10 +4,10 @@ using System.Collections;
 using UnityEngine.UI;
 using UnityEditor;
 
-
 public class EnemyController : MonoBehaviour
 {
     public Transform target;
+    public PoolManager.EnemyPool OriginPool { get; set; }
     [SerializeField] private GameObject deathEffectPrefab;
 
     [Header("적 객체")]
@@ -42,20 +42,19 @@ public class EnemyController : MonoBehaviour
 
     void Awake()
     {
-        OnEnemyHpChanged += UpdateHealthBarUI;
-    }
-
-    void Start()
-    {
-
         spriteRenderer = GetComponent<SpriteRenderer>();
         boxCollider2D = GetComponent<BoxCollider2D>();
         rb = GetComponent<Rigidbody2D>();
         slider = GetComponentInChildren<Slider>();
-        anim = anim = GetComponent<Animator>();
-        target = GameObject.FindWithTag("Player").transform;
+        anim = GetComponent<Animator>();
+        OnEnemyHpChanged += UpdateHealthBarUI;
+    }
+
+    void Start()
+    {    
+        target = GameObject.FindWithTag("Player").transform;  
         
-        EnemyInit();
+        SetColliderSize();
     }
 
     void FixedUpdate()
@@ -63,10 +62,10 @@ public class EnemyController : MonoBehaviour
         Move();
     }
 
-    void EnemyAI() // 나중에 좀 똑똑하게 바꿀때 쓸꺼임
-    {
-        Move();
-    }
+    // void EnemyAI() // 나중에 좀 똑똑하게 바꿀때 쓸꺼임
+    // {
+    //     Move();
+    // }
 
     float t = 0.9f;
     public void Attack()
@@ -99,12 +98,15 @@ public class EnemyController : MonoBehaviour
         slider.value = currentHp / maxHp;
     }
 
-    void EnemyInit()
+    public void SetColliderSize()
     {
         var lb = spriteRenderer.localBounds;   // 피벗 반영된 로컬 공간 Bounds
         boxCollider2D.size   = lb.size;       // 가로/세로
         boxCollider2D.offset = lb.center;     // 피벗이 중앙이 아니어도 정렬됨
+    }
 
+    public void EnemyInit()
+    {
         spriteRenderer.sprite = enemy.sprite;
         EnemyMaxHP = enemy.hp;
         enemySpeed = enemy.speed;
@@ -123,7 +125,12 @@ public class EnemyController : MonoBehaviour
         GameManager.Instance.IncreaseThreatGuage(30);
         ParticleSystem ps = PoolManager.Instance.deathEffectPools.GetParticleSystem(transform.position);
         PoolManager.Instance.deathEffectPools.particleQueue.Enqueue(ps); // 생성과 동시에 넣어주기. 근데 왜 disable할때 넣으면 오류나는지 모르겠음.. 트러블슈팅과제
-        SpawnManager.Instance.Despawn(gameObject);
+        OriginPool.Return(gameObject);
+    }
+
+    public void DespawnEnemy()
+    {
+        OriginPool.Return(gameObject);
     }
 
 }

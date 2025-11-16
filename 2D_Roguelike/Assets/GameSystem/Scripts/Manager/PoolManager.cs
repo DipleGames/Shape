@@ -52,6 +52,7 @@ public class PoolManager : SingleTon<PoolManager>
         public GameObject prefab;
         public int maxSize;
         private readonly Queue<GameObject> q = new();
+        private readonly HashSet<GameObject> active = new(); // 살아있는 애들 목록
 
         public EnemyPool(GameObject prefab, int initial, int max, Transform parent = null)
         {
@@ -67,25 +68,40 @@ public class PoolManager : SingleTon<PoolManager>
 
         public GameObject Get(Enemy enemy, Transform parent = null)
         {
-            EnemyController enemyController;
+            GameObject go;
             if (q.Count > 0)
-            {
-                var go = q.Dequeue();
-                enemyController = go?.GetComponent<EnemyController>();
-                enemyController.enemy = enemy;
-                go.SetActive(true);
-                return go;
-            }
-            // 풀 비었으면 새로 생성 (상한은 호출측에서 관리)
-            var inst = Instantiate(prefab, parent);
-            inst.SetActive(true);
-            return inst;
+                go = q.Dequeue();
+            else
+                go = Instantiate(prefab, parent);
+
+            var enemyController = go.GetComponent<EnemyController>();
+            enemyController.enemy = enemy;
+            enemyController.OriginPool = this; 
+
+            if (parent != null)
+                go.transform.SetParent(parent);
+
+            go.SetActive(true);
+            enemyController.EnemyInit();
+            active.Add(go);      // 살아있는 리스트에 추가
+            return go;
         }
 
         public void Return(GameObject go)
         {
             go.SetActive(false);
+            active.Remove(go);   // 살아있는 리스트에서 제거
             q.Enqueue(go);
+        }
+
+        public void ReturnAllEnemies()
+        {
+            // active를 복사해서 도는 게 안전
+            var snapshot = new List<GameObject>(active);
+            foreach (var go in snapshot)
+            {
+                Return(go);
+            }
         }
     }
 

@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.InputSystem.LowLevel;
 
 public class SpawnManager : SingleTon<SpawnManager>
 {
@@ -30,9 +31,13 @@ public class SpawnManager : SingleTon<SpawnManager>
     {
         base.Awake();
         if (_targetCamera == null) _targetCamera = Camera.main;
-        poolManager.BuildEnemyPools();
-        SpawnPlayer();
-        StartCoroutine(SpawnLoop());
+        SpawnPlayer(); // 플레이어 생성
+        poolManager.BuildEnemyPools(); // 에너미 풀 생성
+    }
+
+    void Start()
+    {
+        StartCoroutine(SpawnLoop()); // 에너미 생성 루프 실행
     }
 
     #region Player
@@ -54,7 +59,7 @@ public class SpawnManager : SingleTon<SpawnManager>
         var wait = new WaitForSeconds(_spawnInterval);
         while (true)
         {
-            if (_alive < _maxAlive)
+            if (GameManager.Instance.gameState == GameState.General && _alive < _maxAlive)
             {
                 TrySpawnEnemy();
             }
@@ -113,19 +118,11 @@ public class SpawnManager : SingleTon<SpawnManager>
 
         if (!found) return;
 
-        var enemy = pool.Get(EnemyManager.Instance.SelectEnemy(), this.transform);
+        var enemy = pool.Get(EnemyManager.Instance.SelectEnemy(), PoolManager.Instance.enemyPoolsParent.transform);
         enemy.transform.position = spawnPos;
         enemy.transform.rotation = Quaternion.identity;
 
         _alive++;
-    }
-
-    public void Despawn(GameObject enemy)
-    {
-        // 어떤 풀 건지 모르면 간단히 비활성만 해도 되지만,
-        // 프리팹 매핑을 원하면 Dictionary<GameObject, EnemyPool>을 추가로 두면 됨.
-        enemy.SetActive(false);
-        _alive = Mathf.Max(0, _alive - 1);
     }
 
     private bool IsOutsideCameraView(Vector3 worldPos)
