@@ -9,6 +9,9 @@ TagManager:
   - Enemy
   - Exp
   - Drain
+  - Boss
+  - BossPattern
+  - SkillEffect
   layers:
   - Default
   - TransparentFX
@@ -21,7 +24,7 @@ TagManager:
   - SkillEffect
   - SkillEffectVolume
   - Projectile
-  - 
+  - BossPattern
   - 
   - 
   - 

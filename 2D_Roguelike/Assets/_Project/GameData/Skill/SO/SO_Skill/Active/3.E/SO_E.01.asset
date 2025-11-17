@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e54004757154b24b99ebcd1c0d1f4a0, type: 3}
+  m_Name: SO_E.01
+  m_EditorClassIdentifier: 
+  skillDefinition:
+    skillType: 1
+    key: 101
+    skillIcon: {fileID: 21300000, guid: 37aaa98daf4001c4798d43bc00ed9e0a, type: 3}
+    skillName: "E\uC2A4\uD0AC"
+    id: 1
+  cooldown: 15
+  manaCost: 15
+  actions:
+  - action: {fileID: 11400000, guid: 8b02a7c42e4a3be47964e22ebb336688, type: 2}
+    parameters:
+      rid: 2773896640084312215
+  - action: {fileID: 11400000, guid: 2db5c651977de324d99a4e1ec0221762, type: 2}
+    parameters:
+      rid: 2773896640084312219
+  references:
+    version: 2
+    RefIds:
+    - rid: 2773896640084312215
+      type: {class: AuraAction/AuraParams, ns: , asm: Assembly-CSharp}
+      data:
+        auraPrefab: {fileID: 3331195370882531115, guid: 78e8788d19161f947953cc6d749ac4c0, type: 3}
+        lifeTime: 5
+    - rid: 2773896640084312219
+      type: {class: DamageAction/DamageParams, ns: , asm: Assembly-CSharp}
+      data:
+        damage: 0.1

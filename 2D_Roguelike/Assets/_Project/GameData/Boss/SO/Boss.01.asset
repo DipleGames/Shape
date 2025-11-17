@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c56996a7f774a4342be15c4ba205cb45, type: 3}
+  m_Name: Boss.01
+  m_EditorClassIdentifier: 
+  sprite: {fileID: 21300000, guid: 0a8682e29943e124da515b562da78d42, type: 3}
+  bossHp: 1000
+  patterns:
+  - pattern: {fileID: 11400000, guid: 8132104e53fd8ac4c91b9ae518679024, type: 2}
+    parameters:
+      rid: 2773896688216834171
+  - pattern: {fileID: 11400000, guid: b98f0c334d68f5340af31844f6a7c345, type: 2}
+    parameters:
+      rid: 2773896708475060339
+  references:
+    version: 2
+    RefIds:
+    - rid: 2773896688216834171
+      type: {class: BarragePattern/BarrageParams, ns: , asm: Assembly-CSharp}
+      data:
+        proj: {fileID: 506385300901391302, guid: 952dab12791d783439d1578781be6567, type: 3}
+        damage: 20
+        count: 10
+        lifeTime: 3
+        speed: 6
+        spreadAngle: 90
+    - rid: 2773896708475060339
+      type: {class: BurstPattern/BurstParams, ns: , asm: Assembly-CSharp}
+      data:
+        burstPrefab: {fileID: 936896657287374117, guid: 94404516330d7084ea8ce1b5e8adb7b6, type: 3}
+        burstChargePrefab: {fileID: 936896657287374117, guid: c09d0407cfea4b341b1225681c695d24, type: 3}
+        damage: 30
+        radius: 1.5
+        duration: 1.5
