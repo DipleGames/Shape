@@ -47,6 +47,7 @@ public class RotateWeapon : Weapon
         for(int i=0; i<count; i++)
         {
             var wp = Instantiate(weaponPrefab, player.transform.position, Quaternion.identity);
+            wp.transform.SetParent(player.transform);
             wp.GetComponent<RotateWeaponObj>().IninRotateWeaponObj(weaponDamage);
             weaponList.Add(wp);
         }

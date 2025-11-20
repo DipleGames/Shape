@@ -12,6 +12,7 @@ TagManager:
   - Boss
   - BossPattern
   - SkillEffect
+  - BossRoom
   layers:
   - Default
   - TransparentFX

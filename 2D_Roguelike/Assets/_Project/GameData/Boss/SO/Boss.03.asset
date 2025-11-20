@@ -21,6 +21,9 @@ MonoBehaviour:
   - pattern: {fileID: 11400000, guid: b98f0c334d68f5340af31844f6a7c345, type: 2}
     parameters:
       rid: 2773896708475060339
+  - pattern: {fileID: 11400000, guid: 4d6b017d28e36b641836f51af29eb912, type: 2}
+    parameters:
+      rid: 2773896760456380506
   references:
     version: 2
     RefIds:
@@ -29,10 +32,10 @@ MonoBehaviour:
       data:
         proj: {fileID: 506385300901391302, guid: 952dab12791d783439d1578781be6567, type: 3}
         damage: 20
-        count: 10
+        count: 7
         lifeTime: 3
         speed: 6
-        spreadAngle: 90
+        spreadAngle: 70
     - rid: 2773896708475060339
       type: {class: BurstPattern/BurstParams, ns: , asm: Assembly-CSharp}
       data:
@@ -41,3 +44,14 @@ MonoBehaviour:
         damage: 30
         radius: 1.5
         duration: 1.5
+    - rid: 2773896760456380506
+      type: {class: LazerPattern/LazerParams, ns: , asm: Assembly-CSharp}
+      data:
+        lazerPrefab: {fileID: 2931744058409439216, guid: 37043fda46ca88f40b282715d0f87ef3, type: 3}
+        damage: 30
+        speed: 3
+        vectors:
+        - {x: 10, y: 0, z: 0}
+        - {x: -10, y: 0, z: 0}
+        - {x: 0, y: 10, z: 0}
+        - {x: 0, y: -10, z: 0}

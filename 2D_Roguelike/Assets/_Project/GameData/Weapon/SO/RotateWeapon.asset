@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: RotateWeapon
   m_EditorClassIdentifier: 
   weaponPrefab: {fileID: 7087446756708655252, guid: bf354aeff33137945b6e228ad130946d, type: 3}
-  weaponDamage: 5
+  weaponDamage: 10
   count: 3
-  _angle: 1776.9309
+  _angle: 23915.121
   radius: 1.5
   rotateSpeed: 180

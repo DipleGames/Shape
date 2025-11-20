@@ -32,7 +32,7 @@ MonoBehaviour:
         count: 10
         lifeTime: 3
         speed: 6
-        spreadAngle: 90
+        spreadAngle: 100
     - rid: 2773896708475060339
       type: {class: BurstPattern/BurstParams, ns: , asm: Assembly-CSharp}
       data:

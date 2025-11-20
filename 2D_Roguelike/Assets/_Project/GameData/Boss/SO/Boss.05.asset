@@ -29,7 +29,7 @@ MonoBehaviour:
       data:
         proj: {fileID: 506385300901391302, guid: 952dab12791d783439d1578781be6567, type: 3}
         damage: 20
-        count: 10
+        count: 9
         lifeTime: 3
         speed: 6
         spreadAngle: 90

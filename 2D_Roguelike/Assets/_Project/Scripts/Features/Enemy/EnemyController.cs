@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using UnityEngine.UI;
 using UnityEditor;
+using TMPro;
 
 public class EnemyController : MonoBehaviour
 {
@@ -36,7 +37,7 @@ public class EnemyController : MonoBehaviour
 
     private SpriteRenderer spriteRenderer;
     private BoxCollider2D boxCollider2D;
-    private Text health_Text;
+    private TextMeshProUGUI health_Text;
     private Animator anim;
     private Rigidbody2D rb;
 
@@ -45,7 +46,7 @@ public class EnemyController : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         boxCollider2D = GetComponent<BoxCollider2D>();
         rb = GetComponent<Rigidbody2D>();
-        health_Text = GetComponentInChildren<Text>();
+        health_Text = GetComponentInChildren<TextMeshProUGUI>();
         anim = GetComponent<Animator>();
         OnEnemyHpChanged += UpdateHealthTextUI;
     }
