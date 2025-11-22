@@ -1,16 +1,9 @@
 using UnityEngine;
 
-public class PrepareManager : MonoBehaviour
+public class PrepareManager : SingleTon<PrepareManager>
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    [Header("Shop(Model) 목록")]
+    public WeaponShop weaponShop;
+    public SkillShop skillShop;
+    public AAShop aaShop; 
 }

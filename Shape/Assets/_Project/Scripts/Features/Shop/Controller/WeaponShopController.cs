@@ -12,15 +12,12 @@ public class WeaponShopController : Shop
     {
         if(isInteract)
         {
-            if(_shopView.weaponShopUI.activeSelf)
-            {
-                _shopView.weaponShopUI.SetActive(false);
-            }
-            else
-            {
-                _shopView.weaponShopUI.SetActive(true);
-            }
+            _shopView.SwitchShopUI(_shopView.weaponShopUI, _shopView.weaponShopUI.activeSelf);
         }
     }
     
+    public void OnClickedUpgradeBtn() // 업그레이드 버튼을 누르는 인풋 -> 모델로 전달
+    {
+        _weaponShop.UpgradeWeapon(PlayerManager.Instance);
+    }
 }

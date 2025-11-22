@@ -7,7 +7,7 @@ public enum SkillType { Passive, Active, Utile }
 [System.Serializable]
 public struct SkillInstance
 {
-    public Skill skill;      // ScriptableObject(데이터)
+    public Skill skill;      // 복사본의 정보가 들어갈거임
     private float _nextReadyTime; // 런타임 상태 (플레이어별)
 
     public bool IsReady => Time.time >= _nextReadyTime;

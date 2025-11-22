@@ -98,25 +98,25 @@ public class PlayerController : MonoBehaviour
             case KeyCode.Q:
                 if(UIManager.Instance.skillRuntimeView.Q_skillSlot.skillInstance.TryConsume())
                 {
-                    pm.battleSystem.SkillExecutor(pm.character.Q_Skill);
+                    pm.battleSystem.SkillExecutor(pm.character.Q_SkillInstance);
                 }
                 break;
             case KeyCode.W:
                 if(UIManager.Instance.skillRuntimeView.W_skillSlot.skillInstance.TryConsume())
                 {
-                    pm.battleSystem.SkillExecutor(pm.character.W_Skill);
+                    pm.battleSystem.SkillExecutor(pm.character.W_SkillInstance);
                 }
                 break;
             case KeyCode.E:
                 if(UIManager.Instance.skillRuntimeView.E_skillSlot.skillInstance.TryConsume())
                 {
-                    pm.battleSystem.SkillExecutor(pm.character.E_Skill);
+                    pm.battleSystem.SkillExecutor(pm.character.E_SkillInstance);
                 }
                 break;
             case KeyCode.R:
                 if(UIManager.Instance.skillRuntimeView.R_skillSlot.skillInstance.TryConsume())
                 {
-                    pm.battleSystem.SkillExecutor(pm.character.R_Skill);
+                    pm.battleSystem.SkillExecutor(pm.character.R_SkillInstance);
                 }
                 break;
             // QWER 스킬 로직...

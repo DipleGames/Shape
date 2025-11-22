@@ -20,22 +20,15 @@ public class Reposition : MonoBehaviour
         float dirX = playerPos.x > targetPoint.x ? -1 : 1;
         float dirY = playerPos.y > targetPoint.y ? -1 : 1;
 
-        switch (transform.tag)
-        {
-            case "Ground":
-                if (diffX > diffY)
-                {    //X축 이동시
-                    transform.Translate(Vector3.right * dirX * 128);
-                }
-                else if (diffX < diffY)
-                {   //Y축 이동시
-                    transform.Translate(Vector3.up * dirY * 128);
-                }
-                break;
-            case "Enemy":
 
-                break;
-
+        if (diffX > diffY)
+        {    //X축 이동시
+            transform.Translate(Vector3.right * dirX * 128);
         }
+        else if (diffX < diffY)
+        {   //Y축 이동시
+            transform.Translate(Vector3.up * dirY * 128);
+        }
+ 
     }
 }

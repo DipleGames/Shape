@@ -21,7 +21,7 @@ public class Character : ScriptableObject
 
 
     [Header("평타 OBJ")]
-    public GameObject aaObj;
+    public GameObject aaProj;
 
     [Header("스킬 셋")]
     public Skill D_Skill;
@@ -29,6 +29,11 @@ public class Character : ScriptableObject
     public Skill W_Skill;
     public Skill E_Skill;
     public Skill R_Skill;
+    [System.NonSerialized] public Skill D_SkillInstance;
+    [System.NonSerialized] public Skill Q_SkillInstance;
+    [System.NonSerialized] public Skill W_SkillInstance;
+    [System.NonSerialized] public Skill E_SkillInstance;
+    [System.NonSerialized] public Skill R_SkillInstance;
 
     [Header("무기")]
     public Weapon weapon;

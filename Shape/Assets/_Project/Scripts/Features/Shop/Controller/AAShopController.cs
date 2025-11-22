@@ -12,8 +12,18 @@ public class AAShopController : Shop
     {
         if(isInteract)
         {
-            _shopView.aaShopUI.SetActive(true);
+            _shopView.SwitchShopUI(_shopView.aaShopUI, _shopView.aaShopUI.activeSelf);
         }
+    }
+
+    public void OnClikedUpgradeRangeBtn()
+    {
+        _aaShop.UpgradeRange();
+    }
+
+    public void OnClikedUpgradePenetrationBtn()
+    {
+        _aaShop.UpgradePenetration();
     }
     
 }

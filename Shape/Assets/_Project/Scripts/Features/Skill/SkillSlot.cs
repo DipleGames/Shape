@@ -7,8 +7,12 @@ public class SkillSlot : MonoBehaviour
     public SkillInstance skillInstance;
     
     [Header("스킬 정보 SO")]
-    public Skill skill;
+    public Skill skill; // 본사본이 들어올거임
     public Image icon;
+
+
+    [Header("스킬 업그레이드 버튼")]
+    [SerializeField] private SkillUpgradeBtn skillUpgradeBtn;
 
     void Awake()
     {
@@ -18,6 +22,7 @@ public class SkillSlot : MonoBehaviour
     public void InitSkill()
     {
         skillInstance = new SkillInstance { skill = skill };
+        skillUpgradeBtn.skill = skillInstance.skill;
         icon.sprite = skill.skillDefinition.skillIcon;
     }
 }

@@ -17,10 +17,10 @@ public class PlayerView : MonoBehaviour
     [Header("스탯 관련")]
     public GameObject stat_panel;
     public GameObject statText_panel;
-    [SerializeField] private List<Text> statTexts = new List<Text>();
+    [SerializeField] private List<Text> _statTexts = new List<Text>();
 
     [Header("크로스 헤어")]
-    [SerializeField] private GameObject aim;
+    [SerializeField] private GameObject _aim;
 
 
     void Update()
@@ -46,17 +46,17 @@ public class PlayerView : MonoBehaviour
 
     public void UpdateUIOnChangePlayerStat(Dictionary<StatType, float> stat)
     {
-        if (statTexts.Count != stat.Count)
+        if (_statTexts.Count != stat.Count)
         {
             for (int i = 0; i < stat.Count; i++)
             {
-                statTexts.Add(statText_panel.transform.GetChild(i).GetComponent<Text>());
+                _statTexts.Add(statText_panel.transform.GetChild(i).GetComponent<Text>());
             }
             PlayerManager pm = PlayerManager.Instance;
             for (int i = 0; i < pm.playerStat.StatList.Count; i++)
             {
                 float displayedValue = Mathf.Round(pm.playerStat.StatList[i].value * 10) / 10f;
-                statTexts[i].text = $"[{pm.playerStat.StatList[i].type}] : {displayedValue}";
+                _statTexts[i].text = $"[{pm.playerStat.StatList[i].type}] : {displayedValue}";
             }
         }
         else
@@ -65,7 +65,7 @@ public class PlayerView : MonoBehaviour
             for (int i = 0; i < pm.playerStat.StatList.Count; i++)
             {
                 float displayedValue = Mathf.Round(pm.playerStat.StatList[i].value * 10) / 10f;
-                statTexts[i].text = $"[{pm.playerStat.StatList[i].type}] : {displayedValue}";
+                _statTexts[i].text = $"[{pm.playerStat.StatList[i].type}] : {displayedValue}";
             }
         }
     }
@@ -88,6 +88,6 @@ public class PlayerView : MonoBehaviour
         Vector3 aimPos = PlayerManager.Instance.aim.GetAimPos();
         aimPos.z = 0;
 
-        aim.transform.position = aimPos;
+        _aim.transform.position = aimPos;
     }
 }

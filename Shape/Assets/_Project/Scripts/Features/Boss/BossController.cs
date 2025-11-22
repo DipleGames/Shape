@@ -45,7 +45,6 @@ public class BossController : MonoBehaviour
 
         OnBossHpChanged += UpdateBossHealthTextUI;
         OnBossDie += BossDie;
-        OnBossDie += GameManager.Instance.OnPreparePhase;
     }
 
 
@@ -95,6 +94,7 @@ public class BossController : MonoBehaviour
 
     public void BossDie()
     {
+        GameManager.Instance.StartPreparePhase(); // 준비페이즈 시작
         Destroy(gameObject);
     }
 }

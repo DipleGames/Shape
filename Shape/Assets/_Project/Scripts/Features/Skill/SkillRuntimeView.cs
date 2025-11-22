@@ -64,19 +64,19 @@ public class SkillRuntimeView : SingleTon<SkillRuntimeView>
     // 캐릭터 선택시 스킬창에 스킬 세팅
     public void SetSkill(Character ch)
     {
-        D_skillSlot.skill = ch.D_Skill;
+        D_skillSlot.skill = ch.D_SkillInstance;
         D_skillSlot.InitSkill();
 
-        Q_skillSlot.skill = ch.Q_Skill;
+        Q_skillSlot.skill = ch.Q_SkillInstance;
         Q_skillSlot.InitSkill();
 
-        W_skillSlot.skill = ch.W_Skill;
+        W_skillSlot.skill = ch.W_SkillInstance;
         W_skillSlot.InitSkill();
 
-        E_skillSlot.skill = ch.E_Skill;
+        E_skillSlot.skill = ch.E_SkillInstance;
         E_skillSlot.InitSkill();
 
-        R_skillSlot.skill = ch.R_Skill;
+        R_skillSlot.skill = ch.R_SkillInstance;
         R_skillSlot.InitSkill();
     }
 }

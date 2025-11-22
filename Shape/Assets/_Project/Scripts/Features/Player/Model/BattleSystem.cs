@@ -47,7 +47,7 @@ public class BattleSystem : MonoBehaviour
 
         public void SetAAPool(Character character)
         {
-            _aaObjPrefab = character.aaObj;
+            _aaObjPrefab = character.aaProj;
             BuildPool();
         }
 
