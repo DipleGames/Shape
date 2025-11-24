@@ -102,7 +102,7 @@ public class PlayerController : MonoBehaviour
         // 이동 스킬(입력만 여기서받고 fixed update에서 처리해야함)
         if (Input.GetKeyDown(KeyCode.D))
         {
-            if(UIManager.Instance.skillRuntimeView.D_skillSlot.skillInstance.TryDashConsume(pm.character.D_SkillInstance.staminaCost))
+            if(UIManager.Instance.skillRuntimeView.D_skillSlot.skillInstance.TryDashCast())
             {
                 dashPressed = true;   
             }
@@ -114,25 +114,25 @@ public class PlayerController : MonoBehaviour
                 pm.battleSystem.autoAttack.AA(pm);
                 break;
             case KeyCode.Q:
-                if(UIManager.Instance.skillRuntimeView.Q_skillSlot.skillInstance.TryConsume()) // 쓸수있으면 
+                if(UIManager.Instance.skillRuntimeView.Q_skillSlot.skillInstance.TryCast()) // 쓸수있으면 
                 {
                     pm.battleSystem.SkillExecutor(pm.character.Q_SkillInstance); // 써라
                 }
                 break;
             case KeyCode.W:
-                if(UIManager.Instance.skillRuntimeView.W_skillSlot.skillInstance.TryConsume())
+                if(UIManager.Instance.skillRuntimeView.W_skillSlot.skillInstance.TryCast())
                 {
                     pm.battleSystem.SkillExecutor(pm.character.W_SkillInstance);
                 }
                 break;
             case KeyCode.E:
-                if(UIManager.Instance.skillRuntimeView.E_skillSlot.skillInstance.TryConsume())
+                if(UIManager.Instance.skillRuntimeView.E_skillSlot.skillInstance.TryCast())
                 {
                     pm.battleSystem.SkillExecutor(pm.character.E_SkillInstance);
                 }
                 break;
             case KeyCode.R:
-                if(UIManager.Instance.skillRuntimeView.R_skillSlot.skillInstance.TryConsume())
+                if(UIManager.Instance.skillRuntimeView.R_skillSlot.skillInstance.TryCast())
                 {
                     pm.battleSystem.SkillExecutor(pm.character.R_SkillInstance);
                 }

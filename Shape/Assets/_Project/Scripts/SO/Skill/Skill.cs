@@ -15,21 +15,23 @@ public struct SkillInstance
     public float Normalized => (skill && skill.cooldown > 0f)
                                ? Remaining / skill.cooldown : 0f;
 
-    public bool TryConsume() // 사용 시 쿨다운 시작
+    public bool TryCast() // 사용 시 쿨다운 시작
     {
         if(PlayerManager.Instance.playerController.Mp < skill.manaCost) return false; // 마나 부족하면 리턴
 
         if (!IsReady || skill == null) return false;
         _nextReadyTime = Time.time + skill.cooldown;
+        PlayerManager.Instance.playerController.Mp -= skill.manaCost;
         return true;
     }
 
-    public bool TryDashConsume(float staminaCost) // 사용 시 쿨다운 시작
+    public bool TryDashCast() // 사용 시 쿨다운 시작
     {
         if(PlayerManager.Instance.playerController.Stamina < skill.staminaCost) return false; // 마나 부족하면 리턴
 
         if (!IsReady || skill == null) return false;
         _nextReadyTime = Time.time + skill.cooldown;
+        PlayerManager.Instance.playerController.Stamina -= skill.staminaCost;
         return true;
     }
 

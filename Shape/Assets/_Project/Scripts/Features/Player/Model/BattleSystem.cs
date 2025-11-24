@@ -24,7 +24,6 @@ public class BattleSystem : MonoBehaviour
             castOrigin = gameObject.transform.position,
             targetPoint = tgt
         };
-        PlayerManager.Instance.playerController.Mp -= skill.manaCost;
         for(int i=0; i<actionLenght; i++)
         {
             StartCoroutine(skill.actions[i].action.Execute(ctx, skill.actions[i].parameters));
@@ -137,8 +136,6 @@ public class BattleSystem : MonoBehaviour
 
         public IEnumerator DashRoutine(Rigidbody2D rb, float staminaCost)
         {
-            if(PlayerManager.Instance.playerController.Stamina < staminaCost) yield break;
-
             // 마우스 방향 계산
             Vector3 m = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             Vector2 dir = ((Vector2)m - rb.position).normalized;
@@ -147,7 +144,7 @@ public class BattleSystem : MonoBehaviour
             Vector2 end = start + dir * _dashDistance;
 
             float t = 0f;
-            while (t < _dashDuration)
+            while (t < _dashDuration || PlayerManager.Instance.playerController.Stamina >= staminaCost)
             {
                 t += Time.fixedDeltaTime;
                 rb.MovePosition(Vector2.Lerp(start, end, t / _dashDuration));
@@ -160,7 +157,6 @@ public class BattleSystem : MonoBehaviour
             // 플레이어 컨트롤러의 targetPoint를 현재 물리 위치로 세팅
             PlayerManager.Instance.playerController.targetPoint = new Vector3(actualEnd.x, actualEnd.y, 0f);
 
-            PlayerManager.Instance.playerController.Stamina -= staminaCost;
         }
         #endregion
     }

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: S0_Agument.01
   m_EditorClassIdentifier: 
   agumentName: "\uCCB4\uB825"
-  agumentDesc: "\uCCAB\uBC88\uCA30 \uC99D\uAC15"
+  agumentDesc: "\uCCB4\uB825 10 \uCD94\uAC00"
   statType: 0
   operationType: 0
   value: 10

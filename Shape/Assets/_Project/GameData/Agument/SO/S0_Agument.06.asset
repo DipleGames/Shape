@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: S0_Agument.06
   m_EditorClassIdentifier: 
   agumentName: "\uCE58\uBA85\uD0C0 \uD655\uB960"
-  agumentDesc: "\uC5EC\uC12F\uBC88\uC9F8 \uC99D\uAC15"
-  statType: 4
+  agumentDesc: "\uCE58\uBA85\uD0C0 \uD655\uB960 5% \uCD94\uAC00"
+  statType: 5
   operationType: 0
   value: 5
