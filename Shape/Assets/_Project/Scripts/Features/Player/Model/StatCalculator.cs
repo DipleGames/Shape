@@ -10,9 +10,11 @@ public class StatCalculator : MonoBehaviour
 {
     public PlayerManager pm;
     private Dictionary<StatType, float> _stat;
+    private Dictionary<StatType, float> _baseStat;
 
     public event Action OnCalculate;
     public event Action<Dictionary<StatType, float>> OnStatChanged;
+
 
     private void Start()
     {
@@ -36,7 +38,7 @@ public class StatCalculator : MonoBehaviour
     #region  Calculator
     public void DefaultCalculate()
     {
-        _stat = pm.playerStat.stat; // 기존 스텟 딕셔너리를 가져온다.
+        _baseStat = pm.playerStat.baseStat; // 기존 스텟 딕셔너리를 가져온다.
 
         if (pm.character == null || pm.levelSystem == null)
         {
@@ -45,16 +47,16 @@ public class StatCalculator : MonoBehaviour
         }
 
         // 1. 캐릭터 디폴트 스탯 임시 변수에 담고 
-        _stat[StatType.MaxHp] = pm.character.baseHp;
-        _stat[StatType.MaxMp] = pm.character.baseMp;
-        _stat[StatType.MaxStamina] = pm.character.baseStamina;
-        _stat[StatType.Speed] = pm.character.baseSpeed;
-        _stat[StatType.Attack] = pm.character.baseAttack;
-        _stat[StatType.CriticalProb] = pm.character.CriticalProb;
-        _stat[StatType.CriticalValue] = pm.character.CriticalValue;
-        _stat[StatType.DrainArea] = pm.character.drainArea;
+        _baseStat[StatType.MaxHp] = pm.character.baseHp;
+        _baseStat[StatType.MaxMp] = pm.character.baseMp;
+        _baseStat[StatType.MaxStamina] = pm.character.baseStamina;
+        _baseStat[StatType.Speed] = pm.character.baseSpeed;
+        _baseStat[StatType.Attack] = pm.character.baseAttack;
+        _baseStat[StatType.CriticalProb] = pm.character.CriticalProb;
+        _baseStat[StatType.CriticalValue] = pm.character.CriticalValue;
+        _baseStat[StatType.DrainArea] = pm.character.drainArea;
 
-        Modifier();
+        Recalculate(ShapeGrowthManager.Instance.shapeGrowth.shapeGrowthDic);
     } 
 
     /// <summary>
@@ -68,18 +70,18 @@ public class StatCalculator : MonoBehaviour
         int idx = L - 1; // 커브 입력용
 
         // 1) 성장테이블 기반 스펙업 레벨 디자인 이후 수정
-        _stat[StatType.MaxHp] += 10f;
-        _stat[StatType.MaxMp] += 10f;
-        _stat[StatType.MaxStamina] += 10f;
-        _stat[StatType.Speed] += 0.1f;
-        _stat[StatType.Attack] += +2f;
+        _baseStat[StatType.MaxHp] += 10f;
+        _baseStat[StatType.MaxMp] += 10f;
+        _baseStat[StatType.MaxStamina] += 10f;
+        _baseStat[StatType.Speed] += 0.1f;
+        _baseStat[StatType.Attack] += +2f;
 
-        Modifier();
+        Recalculate(ShapeGrowthManager.Instance.shapeGrowth.shapeGrowthDic);
     }
     
     public void CalculateOnSelecetAgument(AgumentData agumentData)
     {
-        _stat = pm.playerStat.stat; // 기존 스텟 딕셔너리를 가져온다.
+        _baseStat = pm.playerStat.stat; // 기존 스텟 딕셔너리를 가져온다.
         StatType statType = agumentData.agument.statType;
         OperationType operationType = agumentData.agument.operationType;
         float value = agumentData.agument.value;
@@ -87,14 +89,35 @@ public class StatCalculator : MonoBehaviour
         switch(operationType)
         {
             case OperationType.add:
-                _stat[statType] += value;
+                _baseStat[statType] += value;
                 break;
             case OperationType.mul:
-                _stat[statType] *= (1 + value);
+                _baseStat[statType] *= (1 + value);
                 break;
         }
 
-        Modifier();
+        Recalculate(ShapeGrowthManager.Instance.shapeGrowth.shapeGrowthDic);
+    }
+
+    public void Recalculate(Dictionary<StatType, int> shapeGrowthDic)
+    {
+        _baseStat = pm.playerStat.baseStat;
+        _stat = pm.playerStat.stat; 
+
+        foreach (var kv in _baseStat)
+        {
+            StatType type = kv.Key;
+            float baseValue = kv.Value;
+
+            int lv = 0;
+            if (shapeGrowthDic != null && shapeGrowthDic.TryGetValue(type, out var v))
+                lv = v; // 0~5강
+
+            float factor = 1f + 0.1f * lv; // 예: 1강당 +10%
+            _stat[type] = baseValue * factor;
+        }
+
+        Modifier(); // 이벤트 쏴서 UI, HP 등 갱신
     }
     #endregion
 }

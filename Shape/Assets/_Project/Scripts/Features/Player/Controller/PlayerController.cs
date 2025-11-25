@@ -75,8 +75,6 @@ public class PlayerController : MonoBehaviour
 
         // 시작점 초기화
         targetPoint = transform.position;
-        StartCoroutine(AutoManaRecoverCoroutine());
-        StartCoroutine(AutoStaminaRecoverCoroutine());
     }
 
     public KeyCode key = KeyCode.None;
@@ -193,7 +191,7 @@ public class PlayerController : MonoBehaviour
 
     public void Die() => pm.spriteRenderer.enabled = false;
 
-    IEnumerator AutoManaRecoverCoroutine()
+    public IEnumerator AutoManaRecoverCoroutine()
     {
         while (true)
         {
@@ -202,7 +200,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    IEnumerator AutoStaminaRecoverCoroutine()
+    public IEnumerator AutoStaminaRecoverCoroutine()
     {
         while (true)
         {

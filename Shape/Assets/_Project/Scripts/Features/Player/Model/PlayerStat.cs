@@ -22,6 +22,7 @@ public struct Stat
     public float value;   
 }
 
+
 [DefaultExecutionOrder(-40)]
 public class PlayerStat : MonoBehaviour
 {
@@ -29,8 +30,12 @@ public class PlayerStat : MonoBehaviour
     [SerializeField] private List<Stat> _statList; // 스텟 인스펙터창에 띄울려고 만듦
     public List<Stat> StatList => _statList; // 읽기전용
 
+      // 실제 게임에서 쓰는 현재 스탯
     public Dictionary<StatType, float> stat = new Dictionary<StatType, float>();
     public IReadOnlyDictionary<StatType, float> Stat => stat;
+
+    // 원본 스탯(캐릭터 기본값 + 장비 등) - Shape 강화 전 기준값
+    public Dictionary<StatType, float> baseStat = new Dictionary<StatType, float>();
 
     private void Start()
     {

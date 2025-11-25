@@ -17,5 +17,5 @@ MonoBehaviour:
   weaponDamage: 10
   count: 3
   _angle: 0
-  radius: 1.5
+  radius: 2
   rotateSpeed: 180

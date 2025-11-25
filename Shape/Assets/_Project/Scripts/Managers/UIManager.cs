@@ -13,6 +13,7 @@ public class UIManager : SingleTon<UIManager>
     public ThreatGaugeView threatGaugeView;
     public ShopView shopView;
     public CoinView coinView;
+    public ShapeGrowthView shapeGrowthView;
 
 
     void OnEnable()  => HideCursor();

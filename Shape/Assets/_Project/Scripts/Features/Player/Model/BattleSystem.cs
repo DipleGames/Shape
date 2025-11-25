@@ -13,8 +13,6 @@ public class BattleSystem : MonoBehaviour
     // 스킬 실행기
     public void SkillExecutor(Skill skill)
     {
-        if( PlayerManager.Instance.playerController.Mp < skill.manaCost) return; // 마나부족하면 리턴
-
         int actionLenght = skill.actions.Length;
         Vector3 m = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector3 tgt = new Vector3(m.x, m.y, 0f);
@@ -144,7 +142,7 @@ public class BattleSystem : MonoBehaviour
             Vector2 end = start + dir * _dashDistance;
 
             float t = 0f;
-            while (t < _dashDuration || PlayerManager.Instance.playerController.Stamina >= staminaCost)
+            while (t < _dashDuration)
             {
                 t += Time.fixedDeltaTime;
                 rb.MovePosition(Vector2.Lerp(start, end, t / _dashDuration));

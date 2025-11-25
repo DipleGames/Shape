@@ -18,6 +18,9 @@ public class PlayerView : MonoBehaviour
     [Header("스탯 관련")]
     public GameObject stat_panel;
     public GameObject statText_panel;
+
+    [Header("Shape 성장 시스템 UI")]
+    public GameObject shapeGrowth_UI;
     [SerializeField] private List<Text> _statTexts = new List<Text>();
 
     [Header("크로스 헤어")]
@@ -53,7 +56,7 @@ public class PlayerView : MonoBehaviour
             for (int i = 0; i < pm.playerStat.StatList.Count; i++)
             {
                 float displayedValue = Mathf.Round(pm.playerStat.StatList[i].value * 10) / 10f;
-                _statTexts[i].text = $"[{pm.playerStat.StatList[i].type}] : {displayedValue}";
+                _statTexts[i].text = $"{displayedValue}";
             }
         }
         else
@@ -62,7 +65,7 @@ public class PlayerView : MonoBehaviour
             for (int i = 0; i < pm.playerStat.StatList.Count; i++)
             {
                 float displayedValue = Mathf.Round(pm.playerStat.StatList[i].value * 10) / 10f;
-                _statTexts[i].text = $"[{pm.playerStat.StatList[i].type}] : {displayedValue}";
+                _statTexts[i].text = $"{displayedValue}";
             }
         }
     }
@@ -71,6 +74,12 @@ public class PlayerView : MonoBehaviour
     {
         bool isActive = !stat_panel.activeSelf;
         stat_panel.SetActive(isActive);
+    }
+
+    void OnToggleShapeGrowth()
+    {   
+        bool isActive = !shapeGrowth_UI.activeSelf;
+        shapeGrowth_UI.SetActive(isActive);
     }
 
     public void UpdateUIOnLevelUp(LevelSystem levelSystem)

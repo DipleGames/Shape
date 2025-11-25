@@ -76,6 +76,8 @@ public class PlayerManager : SingleTon<PlayerManager>
         character.weaponInstance = Instantiate(character.weapon);
         character.weaponInstance.InitWeapon(player);
         StartCoroutine(character.weaponInstance.WeaponController(player));
+        StartCoroutine(playerController.AutoManaRecoverCoroutine());
+        StartCoroutine(playerController.AutoStaminaRecoverCoroutine());
     }
 
     void SetSkillData()

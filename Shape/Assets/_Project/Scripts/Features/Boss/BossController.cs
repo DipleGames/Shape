@@ -95,6 +95,7 @@ public class BossController : MonoBehaviour
     public void BossDie()
     {
         GameManager.Instance.StartPreparePhase(); // 준비페이즈 시작
+        ShapeGrowthManager.Instance.shapeGrowth.AddShapePoint(GameManager.Instance.Stage + 1);
         Destroy(gameObject);
     }
 }
