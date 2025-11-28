@@ -191,21 +191,23 @@ public class PlayerController : MonoBehaviour
 
     public void Die() => pm.spriteRenderer.enabled = false;
 
+    public float manaRegen = 0f; // 스페셜 증강으로만 올릴수있는 특수한 스텟이기때문에 기본 스텟에서 제외
     public IEnumerator AutoManaRecoverCoroutine()
     {
         while (true)
         {
             yield return new WaitForSeconds(2f);
-            Mp += 2f;
+            Mp += 2f * (1 + 0.01f * manaRegen);
         }
     }
 
+    public float staminaRegen = 0f; // 스페셜 증강으로만 올릴수있는 특수한 스텟이기때문에 기본 스텟에서 제외
     public IEnumerator AutoStaminaRecoverCoroutine()
     {
         while (true)
         {
             yield return new WaitForSeconds(1f);
-            Stamina += 2f;
+            Stamina += 2f * (1 + 0.01f * staminaRegen);
         }
     }
 }

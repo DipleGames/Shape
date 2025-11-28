@@ -12,7 +12,7 @@ public class ItemManager : SingleTon<ItemManager>
     void Start()
     {
         BuildExpPool();
-        BuildHpPool();
+        BuildHealPool();
     }
 
     public void BuildExpPool()
@@ -50,32 +50,32 @@ public class ItemManager : SingleTon<ItemManager>
     }
 
     [Header("hpPool")]
-    [SerializeField] private GameObject _hpPrefab;
-    [SerializeField] private int _hpSize = 256;
-    public Queue<GameObject> hpPool = new();
+    [SerializeField] private GameObject _healPrefab;
+    [SerializeField] private int _healSize = 256;
+    public Queue<GameObject> healPool = new();
 
-    public void BuildHpPool()
+    public void BuildHealPool()
     {
-        for (int i = 0; i < _hpSize; i++)
+        for (int i = 0; i < _healSize; i++)
         {
-            var go = Instantiate(_hpPrefab, transform);
+            var go = Instantiate(_healPrefab, transform);
             go.SetActive(false);
-            hpPool.Enqueue(go);
+            healPool.Enqueue(go);
         }
 
     }
 
-    public GameObject GetHp()
+    public GameObject GetHeal()
     {
         GameObject go;
-        if(hpPool.Count == 0)
+        if(healPool.Count == 0)
         {
-            go = Instantiate(_hpPrefab, transform);
+            go = Instantiate(_healPrefab, transform);
             go.SetActive(false);
-            hpPool.Enqueue(go);
+            healPool.Enqueue(go);
         }
 
-        go = hpPool.Dequeue();
+        go = healPool.Dequeue();
         go.SetActive(true);
         return go;
     }
@@ -84,7 +84,7 @@ public class ItemManager : SingleTon<ItemManager>
     {
         go.SetActive(false);
         go.transform.SetParent(transform);
-        hpPool.Enqueue(go);
+        healPool.Enqueue(go);
     }
 
     public void DropExp(Vector3 pos, float xpValue)
@@ -103,9 +103,9 @@ public class ItemManager : SingleTon<ItemManager>
         rb.AddForce(randomDir * force, ForceMode2D.Impulse);
     }    
 
-    public void DropHp(Vector3 pos)
+    public void DropHeal(Vector3 pos)
     {
-        var go = GetHp(); 
+        var go = GetHeal(); 
         go.transform.position = pos;
 
         // 360도 랜덤 방향

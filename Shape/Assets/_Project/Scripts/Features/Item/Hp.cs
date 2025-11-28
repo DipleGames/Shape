@@ -8,6 +8,7 @@ public class Hp : Item
         {
             Debug.Log($"hp {value}만큼 획득");
             PlayerManager.Instance.playerController.Hp += value;
+            isDrainArea = false;
             ItemManager.Instance.ReturnHp(gameObject);
         }
     }

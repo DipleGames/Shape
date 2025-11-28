@@ -74,18 +74,18 @@ public class StatCalculator : MonoBehaviour
         _baseStat[StatType.MaxHp] += 10f;
         _baseStat[StatType.MaxMp] += 10f;
         _baseStat[StatType.MaxStamina] += 10f;
-        _baseStat[StatType.Speed] += 0.1f;
+        _baseStat[StatType.Speed] += 0.05f;
         _baseStat[StatType.Attack] += +2f;
 
         Recalculate(ShapeGrowthManager.Instance.shapeGrowth.shapeGrowthDic);
     }
     
-    public void CalculateOnSelecetAgument(AgumentData agumentData)
+    public void CalculateOnSelecetAgument(AgumentData statAgumentData)
     {
         _baseStat = pm.playerStat.baseStat; // 기존 스텟 딕셔너리를 가져온다.
-        StatType statType = agumentData.agument.statType;
-        OperationType operationType = agumentData.agument.operationType;
-        float value = agumentData.agument.value;
+        StatType statType = statAgumentData.statAgument.statType;
+        OperationType operationType = statAgumentData.statAgument.operationType;
+        float value = statAgumentData.statAgument.value;
 
         switch(operationType)
         {

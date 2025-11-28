@@ -15,10 +15,7 @@ public class Item : MonoBehaviour
 
     protected virtual void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player"))
-        {
-            Debug.Log($"{value}");
-        }
+        
     }
     
     protected virtual void Update()

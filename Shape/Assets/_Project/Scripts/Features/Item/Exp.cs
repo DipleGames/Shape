@@ -8,6 +8,7 @@ public class Exp : Item
         {
             Debug.Log($"경험치 {value}만큼 획득");
             PlayerManager.Instance.levelSystem.AddExp(value);
+            isDrainArea = false;
             ItemManager.Instance.ReturnExp(gameObject);
         }
     }

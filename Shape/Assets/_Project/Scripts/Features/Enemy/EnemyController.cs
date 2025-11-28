@@ -152,7 +152,7 @@ public class EnemyController : MonoBehaviour
 
         int ran = UnityEngine.Random.Range(0,99);
         if(ran < 20)
-            ItemManager.Instance.DropHp(transform.position);
+            ItemManager.Instance.DropHeal(transform.position);
         GameManager.Instance.IncreaseThreatGuage(1);
         CoinManager.Instance.AddCoin((int)enemy.hp / 10);
         ParticleSystem ps = PoolManager.Instance.deathEffectPools.GetParticleSystem(transform.position);

@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5c3ff852c744b846b1f8ba8ed2011b1, type: 3}
+  m_Name: SO_SpecialAgument.04
+  m_EditorClassIdentifier: 
+  agumentName: "W\uCFE8\uD0C0\uC784 \uAC10\uC18C"
+  agumentDesc: "W\uC2A4\uD0AC \uCFE8\uD0C0\uC784\uC774 20%\uAC10\uC18C\uD569\uB2C8\uB2E4."

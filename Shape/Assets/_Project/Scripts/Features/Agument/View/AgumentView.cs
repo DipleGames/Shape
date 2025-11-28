@@ -6,20 +6,38 @@ public class AgumentView : MonoBehaviour
 {
     [Header("증강 관련")]
     public GameObject augument_Panel;
-
+    public Text AgumentTitle_Text;
 
     public void UpdateAgumentUI(LevelSystem levelSystem)
     {
         GameObject[] agumentBtns = AgumentManager.Instance.agumentBtns;
-        for (int i = 0; i < agumentBtns.Length; i++)
+        if(levelSystem.Level%5 != 0)
         {
-            AgumentData data = agumentBtns[i].GetComponent<AgumentData>();
-            Text agumentName = agumentBtns[i].transform.GetChild(0).GetComponent<Text>();
-            Text agumentDesc = agumentBtns[i].transform.GetChild(1).GetComponent<Text>();
-            Image agumentImg = agumentBtns[i].transform.GetChild(2).GetComponent<Image>();
+            AgumentTitle_Text.text = "STAT UPGRADE";     
+            for (int i = 0; i < agumentBtns.Length; i++)
+            {
+                AgumentData data = agumentBtns[i].GetComponent<AgumentData>();
+                Text agumentName = agumentBtns[i].transform.GetChild(0).GetComponent<Text>();
+                Text agumentDesc = agumentBtns[i].transform.GetChild(1).GetComponent<Text>();
+                Image agumentImg = agumentBtns[i].transform.GetChild(2).GetComponent<Image>();
 
-            agumentName.text = data.agument.agumentName;
-            agumentDesc.text = data.agument.agumentDesc;
+                agumentName.text = data.statAgument.agumentName;
+                agumentDesc.text = data.statAgument.agumentDesc;
+            }
+        }
+        else if(levelSystem.Level%5 == 0)
+        {
+            AgumentTitle_Text.text = "SPECIAL UPGRADE";
+            for (int i = 0; i < agumentBtns.Length; i++)
+            {
+                AgumentData data = agumentBtns[i].GetComponent<AgumentData>();
+                Text agumentName = agumentBtns[i].transform.GetChild(0).GetComponent<Text>();
+                Text agumentDesc = agumentBtns[i].transform.GetChild(1).GetComponent<Text>();
+                Image agumentImg = agumentBtns[i].transform.GetChild(2).GetComponent<Image>();
+
+                agumentName.text = data.specialAgument.agumentName;
+                agumentDesc.text = data.specialAgument.agumentDesc;
+            }
         }
     }
 }
