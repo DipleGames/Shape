@@ -20,6 +20,7 @@ MonoBehaviour:
     id: 1
   cooldown: 15
   manaCost: 15
+  staminaCost: 0
   actions:
   - action: {fileID: 11400000, guid: 2db5c651977de324d99a4e1ec0221762, type: 2}
     parameters:
@@ -33,7 +34,7 @@ MonoBehaviour:
     - rid: 2773896810579624028
       type: {class: DamageAction/DamageParams, ns: , asm: Assembly-CSharp}
       data:
-        damage: 0.5
+        damage: 0.1
     - rid: 2773896810579624029
       type: {class: AuraAction/AuraParams, ns: , asm: Assembly-CSharp}
       data:

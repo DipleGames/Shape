@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sprite: {fileID: 21300000, guid: f55b2d0c3ac2a47419c7c6405a3e3511, type: 2}
   hp: 100
-  speed: 1.5
+  speed: 2
   attackDamage: 10
-  xpValue: 1
+  xpValue: 10

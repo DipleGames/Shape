@@ -117,15 +117,17 @@ public class PoolManager : SingleTon<PoolManager>
     {
         [SerializeField] private ParticleSystem _particlePrefab;
         [SerializeField] private int _size;
+        private Transform _parent;
         public Queue<ParticleSystem> particleQueue = new Queue<ParticleSystem>();
 
         public ParticlePool(ParticleSystem ParticlePrefab, int size, Transform parent = null)
         {
             _particlePrefab = ParticlePrefab;
             _size = size;
+            _parent = parent;
             for (int i = 0; i < size; i++)
             {
-                var p = Instantiate(ParticlePrefab, parent);
+                var p = Instantiate(_particlePrefab, _parent);
                 p.gameObject.SetActive(false);
                 particleQueue.Enqueue(p);
             }
@@ -133,7 +135,14 @@ public class PoolManager : SingleTon<PoolManager>
 
         public ParticleSystem GetParticleSystem(Vector3 pos)
         {
-            var p = particleQueue.Dequeue();
+            ParticleSystem p;
+            if(particleQueue.Count == 0)
+            {
+                p = Instantiate(_particlePrefab, _parent);
+                p.gameObject.SetActive(false);
+                particleQueue.Enqueue(p);
+            }
+            p = particleQueue.Dequeue();
             p.transform.position = pos;
             p.gameObject.SetActive(true);
             return p;
@@ -145,15 +154,17 @@ public class PoolManager : SingleTon<PoolManager>
     {
         [SerializeField] private GameObject _hitTextPrefab;
         [SerializeField] private int _size = 64;
+        private Transform _parent; 
         public Queue<GameObject> hitTextQueue = new Queue<GameObject>();
 
         public HitTextPool(GameObject hitTextPrefab, int size, Transform parent = null)
         {
             _hitTextPrefab = hitTextPrefab;
             _size = size;
+            _parent = parent;
             for (int i = 0; i < size; i++)
             {
-                var p = Instantiate(_hitTextPrefab, parent);
+                var p = Instantiate(_hitTextPrefab, _parent);
                 p.gameObject.SetActive(false);
                 hitTextQueue.Enqueue(p);
             }
@@ -161,7 +172,11 @@ public class PoolManager : SingleTon<PoolManager>
 
         public GameObject GetHitText(EnemyController enemy, bool isCritical, float damage)
         {
-            var p = hitTextQueue.Dequeue();
+            GameObject p;
+            if(hitTextQueue.Count > 0)
+                p = hitTextQueue.Dequeue();
+            else
+                p = Instantiate(_hitTextPrefab, _parent);
             p.transform.position = enemy.transform.position + new Vector3(0, 1.8f, 0);
             TextMeshProUGUI textMeshProUGUI =  p.GetComponentInChildren<TextMeshProUGUI>();
             textMeshProUGUI.text = $"{(int)damage}";

@@ -22,7 +22,7 @@ public class StatCalculator : MonoBehaviour
 
         OnCalculate += pm.playerStat.SetStatList;
         OnStatChanged += pm.drain.ChangeCircleSize;
-        OnStatChanged += pm.playerController.OnApplyVital;
+        //OnStatChanged += pm.playerController.OnApplyVital;
         OnStatChanged += UIManager.Instance.playerView.UpdateUIOnChangePlayerStat;
     }
 
@@ -57,6 +57,7 @@ public class StatCalculator : MonoBehaviour
         _baseStat[StatType.DrainArea] = pm.character.drainArea;
 
         Recalculate(ShapeGrowthManager.Instance.shapeGrowth.shapeGrowthDic);
+        pm.playerController.OnApplyVital(_baseStat);
     } 
 
     /// <summary>
