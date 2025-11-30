@@ -9,9 +9,13 @@ public class AgumentDatabase : MonoBehaviour
      // 복사본으로 체인지
     void Start()
     {
-        for(int i=0; i<specialAguments.Length; i++)
+        for(int i=0; i<statAguments.Length; i++)
         {
             statAguments[i] = Instantiate(statAguments[i]);
+        }
+
+        for(int i=0; i<specialAguments.Length; i++)
+        {
             specialAguments[i] = Instantiate(specialAguments[i]);
         }
     }

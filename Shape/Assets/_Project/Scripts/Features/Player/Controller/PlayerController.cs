@@ -210,4 +210,6 @@ public class PlayerController : MonoBehaviour
             Stamina += 2f * (1 + 0.01f * staminaRegen);
         }
     }
+
+    public float lifeLeech = 0f;
 }

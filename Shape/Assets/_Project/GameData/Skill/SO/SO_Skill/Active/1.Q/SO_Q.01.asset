@@ -20,6 +20,7 @@ MonoBehaviour:
     id: 1
   cooldown: 3
   manaCost: 5
+  staminaCost: 0
   actions:
   - action: {fileID: 11400000, guid: 2db5c651977de324d99a4e1ec0221762, type: 2}
     parameters:
@@ -33,7 +34,7 @@ MonoBehaviour:
     - rid: 2773896810579624023
       type: {class: DamageAction/DamageParams, ns: , asm: Assembly-CSharp}
       data:
-        damage: 3
+        damage: 300000
     - rid: 2773896810579624024
       type: {class: ProjectileAction/ProjectileParams, ns: , asm: Assembly-CSharp}
       data:

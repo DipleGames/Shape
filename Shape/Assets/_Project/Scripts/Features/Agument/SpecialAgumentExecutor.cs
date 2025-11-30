@@ -17,6 +17,9 @@ public class SpecialAgumentExecutor : MonoBehaviour
             case "스테미너 젠":
                 PlayerManager.Instance.playerController.staminaRegen += 30f;
                 break;
+            case "생명력 흡수":
+                PlayerManager.Instance.playerController.lifeLeech += 0.2f;
+                break;
             case "Q쿨타임 감소":
                 PlayerManager.Instance.character.Q_SkillInstance.cooldown *= 0.8f;
                 break;

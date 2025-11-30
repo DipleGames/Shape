@@ -2,7 +2,6 @@ using UnityEngine;
 using System;
 using System.Collections;
 using UnityEngine.UI;
-using UnityEditor;
 using TMPro;
 using DG.Tweening;
 
@@ -200,6 +199,7 @@ public class EnemyController : MonoBehaviour
     public void TakeDamage(float amount, bool isCritical)
     {
         EnemyHP -= amount;
+        PlayerManager.Instance.playerController.Hp += amount * ( PlayerManager.Instance.playerController.lifeLeech / 100 ); // 생명력 흡수 로직
         //AudioManager.Instance.PlayEnemyHitSFX();
         PoolManager.Instance.hitTextPools.GetHitText(this, isCritical, amount);
         _anim.SetTrigger("Hit");
@@ -212,7 +212,7 @@ public class EnemyController : MonoBehaviour
         int ran = UnityEngine.Random.Range(0,99);
         if(ran < 20)
             ItemManager.Instance.DropHeal(transform.position);
-        GameManager.Instance.IncreaseThreatGuage(1);
+        GameManager.Instance.IncreaseThreatGuage(100);
         CoinManager.Instance.AddCoin((int)enemy.hp / 10);
         ParticleSystem ps = PoolManager.Instance.deathEffectPools.GetParticleSystem(transform.position);
         PoolManager.Instance.deathEffectPools.particleQueue.Enqueue(ps); // 생성과 동시에 넣어주기. 근데 왜 disable할때 넣으면 오류나는지 모르겠음.. 트러블슈팅과제

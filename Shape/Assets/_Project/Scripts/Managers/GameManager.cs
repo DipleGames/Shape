@@ -2,6 +2,8 @@ using UnityEngine;
 using System;
 using UnityEngine.Tilemaps;
 using System.Collections;
+using UnityEngine.SceneManagement;
+
 public enum GameState { General, Boss, Prepare, GameOver } // 제네럴 -> 보스 -> 프리페어 -> 제네럴
 
 public class GameManager : SingleTon<GameManager>
@@ -103,7 +105,7 @@ public class GameManager : SingleTon<GameManager>
         StartCoroutine(OnPreparePhase());
     }
 
-    void ClearBossPatterns()
+    public void ClearBossPatterns()
     {
         var objs = GameObject.FindGameObjectsWithTag("BossPattern");
         foreach (var obj in objs)
@@ -125,5 +127,10 @@ public class GameManager : SingleTon<GameManager>
     public void IncreaseThreatGuage(float amount)
     {
         ThreatGuage += amount;
+    }
+
+    public void OnGameOver()
+    {
+        SceneManager.LoadScene("EndingScene");
     }
 }

@@ -2,11 +2,13 @@ using UnityEngine;
 using System;
 using UnityEngine.UI;
 using TMPro;
+using DG.Tweening;
 
 public class BossController : MonoBehaviour
 {
     public GameObject target;
     public Boss[] boss;
+    [SerializeField] private GameObject _preparePortal;
 
     private SpriteRenderer _spriteRenderer;
     private BoxCollider2D _boxCollider2D;
@@ -102,8 +104,35 @@ public class BossController : MonoBehaviour
 
     public void BossDie()
     {
-        GameManager.Instance.StartPreparePhase(); // 준비페이즈 시작
-        ShapeGrowthManager.Instance.shapeGrowth.AddShapePoint(GameManager.Instance.Stage + 1);
-        Destroy(gameObject);
+        // 현재 색
+        Color originalColor = _spriteRenderer.color;
+
+        // 흔들림 + 축소 + 페이드아웃 시퀀스
+        Sequence seq = DOTween.Sequence();
+
+        seq.Append(transform.DOShakePosition(
+            duration: 2f,
+            strength: new Vector3(0.5f, 0.5f, 0),
+            vibrato: 40,
+            randomness: 90,
+            fadeOut: true
+        ));
+
+        // 2) 축소 (0.5초)
+        seq.Append(transform.DOScale(0f, 0.5f).SetEase(Ease.InBack));
+
+        // 3) 동시에 페이드아웃
+        seq.Join(_spriteRenderer.DOFade(0f, 0.5f));
+
+        // 4) 끝나면 사라지기
+        seq.OnComplete(() =>
+        {
+            GameManager.Instance.ClearBossPatterns();
+            var portal = Instantiate(_preparePortal, transform.position, Quaternion.identity);
+            if(GameManager.Instance.Stage == 7) portal.GetComponent<SpriteRenderer>().color = Color.blue;
+            ShapeGrowthManager.Instance.shapeGrowth.AddShapePoint(GameManager.Instance.Stage + 1);
+            Destroy(gameObject);
+        });
+
     }
 }
