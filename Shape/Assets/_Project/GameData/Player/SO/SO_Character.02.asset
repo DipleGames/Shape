@@ -16,7 +16,7 @@ MonoBehaviour:
   sprite: {fileID: 21300000, guid: f41d5a86cfed7e84991a3bb877d69c55, type: 3}
   baseHp: 150
   baseMp: 150
-  baseStamina: 0
+  baseStamina: 100
   baseSpeed: 5
   baseAttack: 3
   drainArea: 1.5

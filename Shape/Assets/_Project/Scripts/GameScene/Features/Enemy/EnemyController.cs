@@ -212,7 +212,7 @@ public class EnemyController : MonoBehaviour
         int ran = UnityEngine.Random.Range(0,99);
         if(ran < 20)
             ItemManager.Instance.DropHeal(transform.position);
-        GameManager.Instance.IncreaseThreatGuage(100);
+        GameManager.Instance.IncreaseThreatGuage(100); // 임시로 100 넣어놓음
         CoinManager.Instance.AddCoin((int)enemy.hp / 10);
         ParticleSystem ps = PoolManager.Instance.deathEffectPools.GetParticleSystem(transform.position);
         PoolManager.Instance.deathEffectPools.particleQueue.Enqueue(ps); // 생성과 동시에 넣어주기. 근데 왜 disable할때 넣으면 오류나는지 모르겠음.. 트러블슈팅과제
@@ -230,7 +230,7 @@ public class EnemyController : MonoBehaviour
 
         _isCharging = true;
 
-        // 1) 이 순간의 플레이어 방향 고정 (이후 플레이어가 움직여도 방향 안 바뀜)
+        // 플레이어 방향 고정 (이후 플레이어가 움직여도 방향 안 바뀜)
         _dashDir = (target.position - transform.position).normalized;
 
         // 리지드바디 멈추기
@@ -240,8 +240,8 @@ public class EnemyController : MonoBehaviour
         float angle = Mathf.Atan2(_dashDir.y, _dashDir.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(0f, 0f, angle - 90f);
 
-        // 2) DOTween으로 기 모으는 연출
-        //    예시: 살짝 커졌다가 돌아오기 + 붉게 번쩍
+        // DOTween으로 기 모으는 연출
+        // 예시: 살짝 커졌다가 돌아오기 + 붉게 번쩍
         var seq = DOTween.Sequence();
 
         // 스케일로 떨리는 느낌

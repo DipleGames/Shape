@@ -51443,6 +51443,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03c2b1a4e30b66545a6ea7d366f7e82f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerPrefab: {fileID: 5630087314721585141, guid: 85ab023891578144ba9276773ff93e30, type: 3}
+  playerInstance: {fileID: 0}
+  playerTr: {fileID: 0}
   _characterList:
   - {fileID: 11400000, guid: d41856e3953a7764fbe6a5e6d7940257, type: 2}
   - {fileID: 11400000, guid: e97399e3fb6f94e4f89df356dbe6e246, type: 2}
@@ -98407,7 +98410,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameState: 0
-  _stage: 6
+  _stage: 1
   _maxThreatGuage: 100
   _threatGuage: 0
   _groundGrid: {fileID: 1072684781}
@@ -398793,9 +398796,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   poolManager: {fileID: 1497258882}
-  playerPrefab: {fileID: 5630087314721585141, guid: 85ab023891578144ba9276773ff93e30, type: 3}
-  playerInstance: {fileID: 0}
-  playerTr: {fileID: 0}
+  playerManager: {fileID: 870459190}
   bossPrefab: {fileID: 7089994590353789598, guid: 6e1d1fe392583f849aa98ee263814fae, type: 3}
   bossInstance: {fileID: 0}
   bossSpawnPos: {fileID: 1560353933}

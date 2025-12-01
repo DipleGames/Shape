@@ -5,6 +5,11 @@ using UnityEngine;
 [DefaultExecutionOrder(-100)]// 얘가 젤 먼저 실행되야함
 public class PlayerManager : SingleTon<PlayerManager> 
 {
+    [Header("플레이어")]
+    public GameObject playerPrefab;
+    public GameObject playerInstance;
+    public Transform playerTr;
+
     [Header("캐릭터 목록")]
     [SerializeField] private Character[] _characterList;
 
@@ -27,8 +32,11 @@ public class PlayerManager : SingleTon<PlayerManager>
     [Header("현재 선택된 캐릭터")]
     public Character character; // 얘가 중요한거임 일단.
 
-    void Start()
+    protected override void Awake()
     {
+        base.Awake();
+        SpawnPlayer(); // 플레이어 생성
+
         player = GameObject.FindGameObjectWithTag("Player");
 
         // 2. 그 객체의 컴퍼넌트를 담는다.
@@ -44,26 +52,24 @@ public class PlayerManager : SingleTon<PlayerManager>
         rb = player.GetComponent<Rigidbody2D>();
     }
 
-    void Update()
+    void Start()
     {
-        // ========= 임시 코드
-        KeyCode key = KeyCode.None;
-        if (Input.GetKeyDown(KeyCode.Alpha1)) key = KeyCode.Alpha1;
-        else if (Input.GetKeyDown(KeyCode.Alpha2)) key = KeyCode.Alpha2;
+        StartCoroutine(InitPlayerCoroutine());
+    }
 
-        switch (key)
-        {
-            case KeyCode.Alpha1:
-                character = _characterList[0];
-                InitPlayer(character);
-                break;
+    IEnumerator InitPlayerCoroutine()
+    {
+        yield return null;
 
-            case KeyCode.Alpha2:
-                character = _characterList[1];
-                InitPlayer(character);
-                break;
-        }
-        // =========
+        character = _characterList[CharacterManager.Instance.secletCharacterID];
+        InitPlayer(character);
+    }
+
+    void SpawnPlayer()
+    {
+        playerInstance = Instantiate(playerPrefab);
+        playerTr = playerInstance.transform;
+        playerInstance.transform.position = Vector3.zero;
     }
 
     public void InitPlayer(Character character)

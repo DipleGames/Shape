@@ -6,11 +6,7 @@ using UnityEngine.InputSystem.LowLevel;
 public class SpawnManager : SingleTon<SpawnManager>
 {
     public PoolManager poolManager; 
-
-    [Header("플레이어")]
-    public GameObject playerPrefab;
-    public GameObject playerInstance;
-    public Transform playerTr;
+    public PlayerManager playerManager; 
 
     [Header("보스")]
     public GameObject bossPrefab;
@@ -39,7 +35,6 @@ public class SpawnManager : SingleTon<SpawnManager>
     {
         base.Awake();
         if (_targetCamera == null) _targetCamera = Camera.main;
-        SpawnPlayer(); // 플레이어 생성
         poolManager.BuildEnemyPools(); // 에너미 풀 생성
     }
 
@@ -54,14 +49,6 @@ public class SpawnManager : SingleTon<SpawnManager>
         StartCoroutine(SpawnLoop()); // 에너미 생성 루프 실행
     }
 
-    #region Player
-    void SpawnPlayer()
-    {
-        playerInstance = Instantiate(playerPrefab);
-        playerTr = playerInstance.transform;
-        playerInstance.transform.position = Vector3.zero;
-    }
-    #endregion
 
     #region  Boss
     public void SpawnBoss()
@@ -76,7 +63,7 @@ public class SpawnManager : SingleTon<SpawnManager>
     private IEnumerator SpawnLoop()
     {
         // 플레이어 준비 대기
-        while (playerTr == null) yield return null;
+        while (playerManager.playerTr == null) yield return null;
 
         var wait = new WaitForSeconds(_spawnInterval);
         while (true)
@@ -94,7 +81,7 @@ public class SpawnManager : SingleTon<SpawnManager>
 
     private void TrySpawnEnemy()
     {
-        if (poolManager.enemyPools.Count == 0 || playerTr == null) return;
+        if (poolManager.enemyPools.Count == 0 || playerManager.playerTr == null) return;
 
         // 디버그 기록 초기화
         _debugTried.Clear();
@@ -104,7 +91,7 @@ public class SpawnManager : SingleTon<SpawnManager>
         var pool = poolManager.enemyPools[Random.Range(0, poolManager.enemyPools.Count)];
 
         const int MAX_TRIES = 16;
-        Vector3 spawnPos = playerTr.position;
+        Vector3 spawnPos = playerManager.playerTr.position;
         bool found = false;
 
         for (int i = 0; i < MAX_TRIES; i++)
@@ -122,7 +109,7 @@ public class SpawnManager : SingleTon<SpawnManager>
                 continue;
             }
 
-            Vector3 candidate = playerTr.position + (Vector3)local;
+            Vector3 candidate = playerManager.playerTr.position + (Vector3)local;
             candidate.z = 0f;
 
             _debugTried.Add(candidate);
@@ -230,12 +217,12 @@ public class SpawnManager : SingleTon<SpawnManager>
         if (!debugDraw) return;
 
         // 1) 플레이어 중심 스폰 링
-       if (playerTr != null)
+       if (playerManager.playerTr != null)
         {
             // 안쪽 박스 (카메라 근처, 미스폰 영역)
-            DrawRect(playerTr.position, _innerRectHalfSize, Color.yellow);
+            DrawRect(playerManager.playerTr.position, _innerRectHalfSize, Color.yellow);
             // 바깥 박스 (최대 스폰 영역)
-            DrawRect(playerTr.position, _outerRectHalfSize, Color.cyan);
+            DrawRect(playerManager.playerTr.position, _outerRectHalfSize, Color.cyan);
         }
 
 
@@ -243,7 +230,7 @@ public class SpawnManager : SingleTon<SpawnManager>
         if (_targetCamera != null)
         {
             // z깊이: 카메라→그려줄 평면까지의 거리 (2D라면 보통 player z 또는 0 기준)
-            float refZ = playerTr != null ? playerTr.position.z : 0f;
+            float refZ = playerManager.playerTr != null ? playerManager.playerTr.position.z : 0f;
             float depth = refZ - _targetCamera.transform.position.z;
 
             float m = _outOfViewMargin;
