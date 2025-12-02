@@ -10,7 +10,7 @@ public class Portal : MonoBehaviour
                 GameManager.Instance.StartPreparePhase(); // 준비페이즈 시작
             else if(GameManager.Instance.Stage == EnemyManager.Instance.enemyList.Length)
                 GameManager.Instance.OnGameOver();
-
+            ShapeGrowthManager.Instance.shapeGrowth.AddShapePoint(GameManager.Instance.Stage + 1);
             Destroy(gameObject);
         }
     }

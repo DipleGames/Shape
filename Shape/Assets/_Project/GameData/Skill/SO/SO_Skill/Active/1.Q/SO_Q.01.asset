@@ -34,7 +34,7 @@ MonoBehaviour:
     - rid: 2773896810579624023
       type: {class: DamageAction/DamageParams, ns: , asm: Assembly-CSharp}
       data:
-        damage: 300000
+        damage: 3
     - rid: 2773896810579624024
       type: {class: ProjectileAction/ProjectileParams, ns: , asm: Assembly-CSharp}
       data:

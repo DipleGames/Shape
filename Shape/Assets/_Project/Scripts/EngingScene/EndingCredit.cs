@@ -1,5 +1,6 @@
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class EndingCredit : MonoBehaviour
 {
@@ -18,9 +19,7 @@ public class EndingCredit : MonoBehaviour
             .SetEase(Ease.Linear)
             .OnComplete(() =>
             {
-                #if UNITY_EDITOR
-                    UnityEditor.EditorApplication.isPlaying = false;
-                #endif
+                SceneManager.LoadScene("LobbyScene");
             });
     }
 }

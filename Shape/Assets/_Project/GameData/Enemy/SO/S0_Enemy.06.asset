@@ -17,4 +17,4 @@ MonoBehaviour:
   hp: 2000
   speed: 1.8
   attackDamage: 60
-  xpValue: 60
+  xpValue: 108

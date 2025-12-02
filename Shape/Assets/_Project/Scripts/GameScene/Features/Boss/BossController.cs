@@ -130,7 +130,6 @@ public class BossController : MonoBehaviour
             GameManager.Instance.ClearBossPatterns();
             var portal = Instantiate(_preparePortal, transform.position, Quaternion.identity);
             if(GameManager.Instance.Stage == 7) portal.GetComponent<SpriteRenderer>().color = Color.blue;
-            ShapeGrowthManager.Instance.shapeGrowth.AddShapePoint(GameManager.Instance.Stage + 1);
             Destroy(gameObject);
         });
 

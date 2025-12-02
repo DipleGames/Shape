@@ -212,7 +212,7 @@ public class EnemyController : MonoBehaviour
         int ran = UnityEngine.Random.Range(0,99);
         if(ran < 20)
             ItemManager.Instance.DropHeal(transform.position);
-        GameManager.Instance.IncreaseThreatGuage(100); // 임시로 100 넣어놓음
+        GameManager.Instance.IncreaseThreatGuage(1); // 임시로 100 넣어놓음
         CoinManager.Instance.AddCoin((int)enemy.hp / 10);
         ParticleSystem ps = PoolManager.Instance.deathEffectPools.GetParticleSystem(transform.position);
         PoolManager.Instance.deathEffectPools.particleQueue.Enqueue(ps); // 생성과 동시에 넣어주기. 근데 왜 disable할때 넣으면 오류나는지 모르겠음.. 트러블슈팅과제
