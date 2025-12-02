@@ -9,7 +9,7 @@ public class ShapeGrowthView : MonoBehaviour
 
     public void OnUpdateShapeGrowthUI(ShapeGrowthCard shapeGrowthCard)
     {
-        shapeGrowthCard.slider.value = ShapeGrowthManager.Instance.shapeGrowth.shapeGrowthDic[shapeGrowthCard.statType] / 5f;
+        shapeGrowthCard.shapeGrowth_Text.text = $"{ShapeGrowthManager.Instance.shapeGrowth.shapeGrowthDic[shapeGrowthCard.statType]} / 5";
         OnUpdateShapeGrowthText();
     }
 

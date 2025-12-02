@@ -23,14 +23,4 @@ public class ShapeGrowth : MonoBehaviour
         UIManager.Instance.shapeGrowthView.OnUpdateShapeGrowthUI(shapeGrowthCard);
         PlayerManager.Instance.statCalculator.Recalculate(shapeGrowthDic);
     }
-
-    public void RevertShapeGrowth(StatType statType, ShapeGrowthCard shapeGrowthCard)
-    {
-        if(shapeGrowthDic[statType] == 0) return;
-        if(currentShapePoint == shapePoint) return;
-        shapeGrowthDic[statType]--;
-        currentShapePoint++;
-        UIManager.Instance.shapeGrowthView.OnUpdateShapeGrowthUI(shapeGrowthCard);
-        PlayerManager.Instance.statCalculator.Recalculate(shapeGrowthDic);
-    }
 }

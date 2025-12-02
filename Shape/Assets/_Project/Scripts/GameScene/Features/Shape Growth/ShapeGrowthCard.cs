@@ -1,29 +1,25 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.ProBuilder.Shapes;
 using UnityEngine.UI;
 
 public class ShapeGrowthCard : MonoBehaviour
 {
-    public Slider slider;
-    public Button upBtn;
-    public Button downBtn;
+
+    public Button Btn;
+    public TextMeshProUGUI shapeGrowth_Text;
+
 
     public StatType statType;
 
     private void Start()
     {
-        upBtn.onClick.AddListener(UpBtn);
-        downBtn.onClick.AddListener(DownBtn);
+        Btn.onClick.AddListener(OnClickedBtn);
     }
 
 
-    public void UpBtn()
+    public void OnClickedBtn()
     {
         ShapeGrowthManager.Instance.shapeGrowth.OnShapeGrowth(statType, this);
-    }
-
-    public void DownBtn()
-    {
-        ShapeGrowthManager.Instance.shapeGrowth.RevertShapeGrowth(statType, this);
     }
 }
