@@ -50777,6 +50777,8 @@ MonoBehaviour:
   _expSize: 4
   _healPrefab: {fileID: 8930722001173588358, guid: 9722d7a324a4eab4cab2d39fb4db49f0, type: 3}
   _healSize: 256
+  _shapePiecePrefab: {fileID: 8930722001173588358, guid: cb45bff563b03c740a9c61f3ab04324c, type: 3}
+  _shapePieceSize: 16
 --- !u!4 &1003814528
 Transform:
   m_ObjectHideFlags: 0
@@ -95778,6 +95780,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1386714256}
   m_CullTransparentMesh: 1
+--- !u!1 &1396120532
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1396120533}
+  m_Layer: 0
+  m_Name: ShapePieceManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1396120533
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1396120532}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1556617590}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1400915858
 GameObject:
   m_ObjectHideFlags: 0
@@ -138404,6 +138437,7 @@ Transform:
   - {fileID: 329710068}
   - {fileID: 1497258881}
   - {fileID: 643753915}
+  - {fileID: 1396120533}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1558725416

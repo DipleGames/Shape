@@ -30,5 +30,14 @@ public class Drain : MonoBehaviour
                 hp.isDrainArea = true;
             }
         }
+
+        if(_cc.IsTouching(collision))
+        {
+            if(collision.CompareTag("ShapePiece"))
+            {
+                ShapePiece hp = collision.GetComponent<ShapePiece>();
+                hp.isDrainArea = true;
+            }
+        }
     }
 }

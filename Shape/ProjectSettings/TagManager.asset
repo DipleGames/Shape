@@ -17,6 +17,7 @@ TagManager:
   - ShopUI
   - Undefined
   - Hp
+  - ShapePiece
   layers:
   - Default
   - TransparentFX

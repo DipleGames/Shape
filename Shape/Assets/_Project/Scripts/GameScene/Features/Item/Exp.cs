@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class Exp : Item
 {
+    public float value;
+    
     protected override void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))

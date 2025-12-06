@@ -209,9 +209,14 @@ public class EnemyController : MonoBehaviour
     {
         ItemManager.Instance.DropExp(transform.position, enemy.xpValue);
 
-        int ran = UnityEngine.Random.Range(0,99);
-        if(ran < 20)
+        int ranHeal = UnityEngine.Random.Range(0,99); // 힐 아이템 확률
+        if(ranHeal < 20)
             ItemManager.Instance.DropHeal(transform.position);
+
+        int ranShapePiece = UnityEngine.Random.Range(0,99); // 모양 조각 아이템 확률
+        if(ranShapePiece < 50)
+            ItemManager.Instance.DropShapePiece(transform.position);
+
         GameManager.Instance.IncreaseThreatGuage(1); // 임시로 100 넣어놓음
         CoinManager.Instance.AddCoin((int)enemy.hp / 10);
         ParticleSystem ps = PoolManager.Instance.deathEffectPools.GetParticleSystem(transform.position);

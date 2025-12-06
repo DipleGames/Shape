@@ -12,10 +12,10 @@ GameObject:
   - component: {fileID: 6249029547340888971}
   - component: {fileID: 7828913221380079335}
   - component: {fileID: 5833576938715123983}
-  - component: {fileID: 2899222628976127065}
+  - component: {fileID: 873645493078058669}
   m_Layer: 0
-  m_Name: item_heal
-  m_TagString: Hp
+  m_Name: item_shapepiece
+  m_TagString: ShapePiece
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -79,7 +79,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: c3f30bb09e3db234e98ad825ff2b34ef, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 226a8ec201e473d449b21778707e403b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -153,7 +153,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &2899222628976127065
+--- !u!114 &873645493078058669
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -162,9 +162,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 8930722001173588358}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 495f5344b7374be4dac733c6e9cea1db, type: 3}
+  m_Script: {fileID: 11500000, guid: 06996203e924ac24da0494e1524fc3f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10
   isDrainArea: 0
-  _value: 10
+  statType: 0

@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class Item : MonoBehaviour
 {
-    public float value; 
     public float speed = 5f;
     public bool isDrainArea = false;
 

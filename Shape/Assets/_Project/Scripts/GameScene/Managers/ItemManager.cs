@@ -13,6 +13,7 @@ public class ItemManager : SingleTon<ItemManager>
     {
         BuildExpPool();
         BuildHealPool();
+        BuildShapePiecePool();
     }
 
     public void BuildExpPool()
@@ -80,12 +81,51 @@ public class ItemManager : SingleTon<ItemManager>
         return go;
     }
 
-    public void ReturnHp(GameObject go)
+    public void ReturnHeal(GameObject go)
     {
         go.SetActive(false);
         go.transform.SetParent(transform);
         healPool.Enqueue(go);
     }
+
+    [Header("shapePiecePool")]
+    [SerializeField] private GameObject _shapePiecePrefab;
+    [SerializeField] private int _shapePieceSize = 16;
+    public Queue<GameObject> shapePiecePool = new();
+
+    public void BuildShapePiecePool()
+    {
+        for (int i = 0; i < _healSize; i++)
+        {
+            var go = Instantiate(_shapePiecePrefab, transform);
+            go.SetActive(false);
+            healPool.Enqueue(go);
+        }
+
+    }
+
+    public GameObject GetShapePiece()
+    {
+        GameObject go;
+        if(shapePiecePool.Count == 0)
+        {
+            go = Instantiate(_shapePiecePrefab, transform);
+            go.SetActive(false);
+            shapePiecePool.Enqueue(go);
+        }
+
+        go = shapePiecePool.Dequeue();
+        go.SetActive(true);
+        return go;
+    }
+
+    public void ReturnShapePiece(GameObject go)
+    {
+        go.SetActive(false);
+        go.transform.SetParent(transform);
+        shapePiecePool.Enqueue(go);
+    }
+
 
     public void DropExp(Vector3 pos, float xpValue)
     {
@@ -106,6 +146,22 @@ public class ItemManager : SingleTon<ItemManager>
     public void DropHeal(Vector3 pos)
     {
         var go = GetHeal(); 
+        go.transform.position = pos;
+
+        // 360도 랜덤 방향
+        Vector2 randomDir = UnityEngine.Random.insideUnitCircle.normalized;
+
+        // 튀는 힘
+        float force = UnityEngine.Random.Range(1.5f, 3f);
+
+        // 튕겨 나가는 연출
+        Rigidbody2D rb = go.GetComponent<Rigidbody2D>();
+        rb.AddForce(randomDir * force, ForceMode2D.Impulse);
+    }    
+
+    public void DropShapePiece(Vector3 pos)
+    {
+        var go = GetShapePiece(); 
         go.transform.position = pos;
 
         // 360도 랜덤 방향
