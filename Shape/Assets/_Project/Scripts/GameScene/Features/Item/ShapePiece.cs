@@ -15,7 +15,7 @@ public class ShapePiece : Item
     {
         if (collision.CompareTag("Player"))
         {
-            ShapePieceManager.Instance.shapePieceList.Add(this);
+            ShapePieceManager.Instance.CalculateShapePiece(this);
         }
     }
 

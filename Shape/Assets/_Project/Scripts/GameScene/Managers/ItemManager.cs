@@ -95,7 +95,7 @@ public class ItemManager : SingleTon<ItemManager>
 
     public void BuildShapePiecePool()
     {
-        for (int i = 0; i < _healSize; i++)
+        for (int i = 0; i < _shapePieceSize; i++)
         {
             var go = Instantiate(_shapePiecePrefab, transform);
             go.SetActive(false);
