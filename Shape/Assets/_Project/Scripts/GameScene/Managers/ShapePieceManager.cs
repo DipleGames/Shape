@@ -18,6 +18,6 @@ public class ShapePieceManager : SingleTon<ShapePieceManager>
     public void CalculateShapePiece(ShapePiece shapePiece)
     {
         shapePieceDic[shapePiece.statType] += shapePiece.statValue; 
-        Debug.Log($"{shapePiece.statType} 의 밸류는 {shapePiece.statValue} 입니다.");
+        Debug.Log($"{shapePieceDic[shapePiece.statType]} 의 밸류는 {shapePiece.statValue} 입니다.");
     }
 }

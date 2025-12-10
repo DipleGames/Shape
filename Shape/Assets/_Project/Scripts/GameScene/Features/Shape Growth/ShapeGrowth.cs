@@ -21,6 +21,6 @@ public class ShapeGrowth : MonoBehaviour
         shapeGrowthDic[statType]++;
         currentShapePoint--;
         UIManager.Instance.shapeGrowthView.OnUpdateShapeGrowthUI(shapeGrowthCard);
-        PlayerManager.Instance.statCalculator.Recalculate(shapeGrowthDic);
+        PlayerManager.Instance.statCalculator.Recalculate(shapeGrowthDic, ShapePieceManager.Instance.shapePieceDic);
     }
 }

@@ -16,6 +16,7 @@ public class ShapePiece : Item
         if (collision.CompareTag("Player"))
         {
             ShapePieceManager.Instance.CalculateShapePiece(this);
+            PlayerManager.Instance.statCalculator.Recalculate(ShapeGrowthManager.Instance.shapeGrowth.shapeGrowthDic, ShapePieceManager.Instance.shapePieceDic);
         }
     }
 

@@ -56,7 +56,7 @@ public class StatCalculator : MonoBehaviour
         _baseStat[StatType.CriticalValue] = pm.character.CriticalValue;
         _baseStat[StatType.DrainArea] = pm.character.drainArea;
 
-        Recalculate(ShapeGrowthManager.Instance.shapeGrowth.shapeGrowthDic);
+        Recalculate(ShapeGrowthManager.Instance.shapeGrowth.shapeGrowthDic, ShapePieceManager.Instance.shapePieceDic);
         pm.playerController.OnApplyVital(_baseStat);
     } 
 
@@ -77,7 +77,7 @@ public class StatCalculator : MonoBehaviour
         _baseStat[StatType.Speed] += 0.05f;
         _baseStat[StatType.Attack] += +2f;
 
-        Recalculate(ShapeGrowthManager.Instance.shapeGrowth.shapeGrowthDic);
+        Recalculate(ShapeGrowthManager.Instance.shapeGrowth.shapeGrowthDic, ShapePieceManager.Instance.shapePieceDic);
     }
     
     public void CalculateOnSelecetAgument(AgumentData statAgumentData)
@@ -97,10 +97,10 @@ public class StatCalculator : MonoBehaviour
                 break;
         }
 
-        Recalculate(ShapeGrowthManager.Instance.shapeGrowth.shapeGrowthDic);
+        Recalculate(ShapeGrowthManager.Instance.shapeGrowth.shapeGrowthDic, ShapePieceManager.Instance.shapePieceDic);
     }
 
-    public void Recalculate(Dictionary<StatType, int> shapeGrowthDic)
+    public void Recalculate(Dictionary<StatType, int> shapeGrowthDic, Dictionary<StatType, float> shapePieceDic)
     {
         _baseStat = pm.playerStat.baseStat;
         _stat = pm.playerStat.stat; 
@@ -115,11 +115,14 @@ public class StatCalculator : MonoBehaviour
                 lv = v; // 0~5강
 
             float factor = 1f + 0.1f * lv; // 예: 1강당 +10%
+           
             if(type != StatType.CriticalProb)
-                _stat[type] = baseValue * factor;
+                _stat[type] = baseValue * factor + shapePieceDic[type];
             else if(type == StatType.CriticalProb) // 치명타 확률은 20%씩 증가하는걸로 왜냐하면 치명타확률은 Shape 성장시스템으로 밖에 얻지못함. 그리고 애초에 0이기때문에 baseValue * factor 안됨
                 _stat[type] = 20f * lv;
         }
+
+
 
         Modifier(); // 이벤트 쏴서 UI, HP 등 갱신
     }
