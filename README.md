@@ -41,65 +41,37 @@
 
 ### 폴더 구조
 <pre>
-📦 Project-AM
+📦 Shape
 └── 📂 Assets
-    └── 📂 02_Scripts
-        ├── 📜 Enums.cs
-        ├── 📂 Building
-        │   ├── 📜 BuildingComponent.cs
-        │   ├── 📜 BuildingData.cs
-        │   ├── 📜 BuildingEntity.cs
-        │   ├── 📜 BuildingEvents.cs
-        │   ├── 📜 BuildingPreviewComponent.cs
-        │   └── 📂 Grid
-        │       ├── 📜 BuildGridContainer.cs
-        │       └── 📜 GridCell.cs
-        ├── 📂 Data
-        │   └── 📂 Audio
-        │       ├── 📜 BGMData.cs
-        │       └── 📜 SFXData.cs
-        ├── 📂 Inventory
-        │   ├── 📜 GachaBuilding.cs
-        │   ├── 📜 InventoryComponent.cs
-        │   ├── 📜 InventoryEvents.cs
-        │   └── 📜 InventorySlot.cs
-        ├── 📂 Manager
-        │   ├── 📜 AudioManager.cs
-        │   ├── 📜 EnemySpawnerDataManager.cs
-        │   ├── 📜 GameManager.cs
-        │   ├── 📜 NexusManager.cs
-        │   ├── 📜 ResourceManager.cs
-        │   ├── 📜 Singleton.cs
-        │   ├── 📜 StageManager.cs
-        │   ├── 📜 UIManager.cs
-        │   └── 📜 UnitDataManager.cs
-        ├── 📂 Map
-        │   ├── 📜 ClampCamera.cs
-        │   ├── 📜 Nexus.cs
-        │   └── 📜 NexusHpBar.cs
-        ├── 📂 UI
-        │   ├── 📜 ButtonXSpeed.cs
-        │   ├── 📜 CameraController.cs
-        │   ├── 📜 NexusCondition.cs
-        │   ├── 📜 TextMoney.cs
-        │   └── 📜 TextTimer.cs
-        ├── 📂 Unit
-        │   ├── 📜 EnemySpawner.cs
-        │   ├── 📜 EnemySpawnerData.cs
-        │   ├── 📜 EnemySpawnerDataJson.cs
-        │   ├── 📜 EnemyUnit.cs
-        │   ├── 📜 MapBoundary.cs
-        │   ├── 📜 PlayerSpawner.cs
-        │   ├── 📜 PlayerUnit.cs
-        │   ├── 📜 UnitBase.cs
-        │   ├── 📜 UnitCombat.cs
-        │   ├── 📜 UnitData.cs
-        │   ├── 📜 UnitDataJson.cs
-        │   ├── 📜 UnitHPVisual.cs
-        │   ├── 📜 UnitMovement.cs
-        │   └── 📜 UnitSpawner.cs
-        └── 📂 Utils
-            └── 📜 Extensions.cs
+    └── 📂 _Project
+        └── 📂 Scripts
+            ├── 📜 Enums.cs
+            ├── 📂 EndingScene
+            │   └── 📜 EndingCredit.cs
+            ├── 📂 GameScene
+            │   ├── 📂 Common
+            │   │   ├── 📜 CameraController.cs
+            │   │   ├── 📜 CameraViewGizmo.cs
+            │   │   ├── 📜 Proj.cs
+            │   │   ├── 📜 Reposition.cs
+            │   │   └── 📜 Portal.cs
+            │   ├── 📂 Core
+            │   │   └── 📜 SingleTon.cs
+            │   ├── 📂 Features
+            │   │   ├── 📂 Managers
+            │   │   ├── 📂 Agument
+            │   │   ├── 📂 Boss
+            │   │   ├── 📂 Coin
+            │   │   ├── 📂 Enemy
+            │   │   ├── 📂 Item
+            │   │   ├── 📂 Player
+            │   │   ├── 📂 ShapeGrowth
+            │   │   ├── 📂 Shop
+            │   │   ├── 📂 Skill
+            │   │   └── 📂 Weapon
+            └── 📂 LobbyScene
+                ├── 📜 CharacterManager.cs
+                └── 📜 LobbyManager.cs
 </pre>
 
 ### 게임 구조도
