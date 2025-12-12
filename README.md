@@ -40,7 +40,7 @@
 ### 참고 게임
 <div style="display: flex; gap: 16px;">
   <img width="500" src="https://github.com/user-attachments/assets/1326ec2d-42ad-4dad-8183-e3f773e527c1" />
-  <img width="500" src="https://github.com/user-attachments/assets/b1fd5ea7-c4ce-4784-b0c3-3de88a1c9931" />
+  <img width="500" src="https://github.com/user-attachments/assets/f3513ffa-9b9c-4013-ac69-6ccbdabe4c4e" />
 </div>
 
 ### 폴더 구조
