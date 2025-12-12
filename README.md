@@ -37,8 +37,10 @@
   5. 이렇게 성장해나가며 최종단계 7스테이지를 격파하는 간단한 게임입니다.
 
   
-### 참고 게임 (세피리아)
-<img width="451" height="455" alt="image" src="https://github.com/user-attachments/assets/d9fb77f7-ac9c-4c66-abce-6c83da99627d" />
+### 참고 게임
+<div style="display: flex; gap: 16px;">
+  <img width="500" src="https://github.com/user-attachments/assets/1326ec2d-42ad-4dad-8183-e3f773e527c1" />
+</div>
 
 ### 폴더 구조
 <pre>
