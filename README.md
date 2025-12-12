@@ -1,8 +1,7 @@
 # SHAPE
 # 유니티 1인 개발 프로젝트
 
-<img width="1228" height="353" alt="image" src="https://github.com/user-attachments/assets/7ac3dbb4-1595-4767-85a2-2859f006b3d9" />
-<img width="1228" height="353" alt="image" src="https://github.com/user-attachments/assets/2a5c2559-e0ec-4f9a-a8bf-15286f0d86c5" />
+<img width="1228" height="353" alt="image" src="https://github.com/user-attachments/assets/7ac3dbb4-1595-4767-85a2-2859f006b3d9" /><img width="1228" height="353" alt="image" src="https://github.com/user-attachments/assets/2a5c2559-e0ec-4f9a-a8bf-15286f0d86c5" />
 
 # 1. 프로젝트 소개 
 ‘SHAPE는 도형의 모양만을 이용하여 만든 간단한 컨셉의 로그라이크 게임으로 스테이지를 돌파해가며 최종 스테이지를 격파하는것을 목표로하는 게임입니다..
