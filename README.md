@@ -69,6 +69,31 @@
             │   │   ├── 📂 Shop
             │   │   ├── 📂 Skill
             │   │   └── 📂 Weapon
+            │   ├── 📂 Managers
+            │   │   ├── 📜 AgumentManager.cs
+            │   │   ├── 📜 AudioManager.cs
+            │   │   ├── 📜 EnemyManager.cs
+            │   │   ├── 📜 GameManager.cs
+            │   │   ├── 📜 ItemManager.cs
+            │   │   ├── 📜 PlayerManager.cs
+            │   │   ├── 📜 PoolManager.cs
+            │   │   ├── 📜 PrepareManager.cs
+            │   │   ├── 📜 ShapeGrowthManager.cs
+            │   │   ├── 📜 ShapePieceManager.cs
+            │   │   ├── 📜 SpawnManager.cs
+            │   │   └── 📜 UIManager.cs
+            │   ├── 📂 SO
+            │   │   ├── 📂 Agument
+            │   │   │   ├── 📜 SpecialAgument.cs
+            │   │   │   └── 📜 StatAgument.cs
+            │   │   ├── 📂 Boss
+            │   │   │   ├── 📜 Boss.cs
+            │   │   │   └── 📜 BossPattern.cs  
+            │   │   ├── 📂 Skill
+            │   │   │   ├── 📜 Skill.cs
+            │   │   │   └── 📜 SkillAction.cs  
+            │   │   └── 📂 Weapon
+            │   │   │   └── 📜 Weapon.cs  
             └── 📂 LobbyScene
                 ├── 📜 CharacterManager.cs
                 └── 📜 LobbyManager.cs
