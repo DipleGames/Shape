@@ -101,7 +101,9 @@
 
 # 게임 구조도
 ### LobbyScene
-<img width="9366" height="4774" alt="image" src="https://github.com/user-attachments/assets/eca51ab9-0c69-4b72-ba7a-9b14de771b40"/>
+<div style="display: flex; gap: 16px;">
+  <img width="500" src="https://github.com/user-attachments/assets/951ac76a-0296-4cc9-b204-8fb1e46fd890" />
+</div>
 ### GameScene
 <img width="9366" height="4774" alt="image" src="https://github.com/user-attachments/assets/eca51ab9-0c69-4b72-ba7a-9b14de771b40"/>
 ### EndingScene
