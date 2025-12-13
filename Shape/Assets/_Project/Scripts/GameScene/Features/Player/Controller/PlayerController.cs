@@ -18,8 +18,8 @@ public class PlayerController : MonoBehaviour
     public event Action<PlayerController> OnHpChanged, OnMpChanged, OnStaminaChanged;
 
     Rigidbody2D rb;     
-    float speed => pm && pm.playerStat && pm.playerStat.stat.ContainsKey(StatType.Speed)
-                    ? pm.playerStat.stat[StatType.Speed] : 0f;
+    float speed => pm && pm.statModel && pm.statModel.stat.ContainsKey(StatType.Speed)
+                    ? pm.statModel.stat[StatType.Speed] : 0f;
 
     void Awake()
     {
@@ -31,7 +31,7 @@ public class PlayerController : MonoBehaviour
         get => _hp;
         set
         {
-            float max = pm.playerStat ? pm.playerStat.stat[StatType.MaxHp] : Mathf.Infinity;
+            float max = pm.statModel ? pm.statModel.stat[StatType.MaxHp] : Mathf.Infinity;
             float nv = Mathf.Clamp(value, 0f, max);
             if (Mathf.Approximately(_hp, nv)) return;
             _hp = nv;
@@ -45,7 +45,7 @@ public class PlayerController : MonoBehaviour
         get => _mp;
         set
         {
-            float max = pm.playerStat ? pm.playerStat.stat[StatType.MaxMp] : Mathf.Infinity;
+            float max = pm.statModel ? pm.statModel.stat[StatType.MaxMp] : Mathf.Infinity;
             float nv = Mathf.Clamp(value, 0f, max);
             if (Mathf.Approximately(_mp, nv)) return;
             _mp = nv;
@@ -58,7 +58,7 @@ public class PlayerController : MonoBehaviour
         get => _stamina;
         set
         {
-            float max = pm.playerStat ? pm.playerStat.stat[StatType.MaxStamina] : Mathf.Infinity;
+            float max = pm.statModel ? pm.statModel.stat[StatType.MaxStamina] : Mathf.Infinity;
             float nv = Mathf.Clamp(value, 0f, max);
             if (Mathf.Approximately(_stamina, nv)) return;
             _stamina = nv;
@@ -109,30 +109,30 @@ public class PlayerController : MonoBehaviour
         switch (key)
         {
             case KeyCode.A:
-                pm.battleSystem.autoAttack.AA(pm);
+                pm.battleController.autoAttack.AA(pm);
                 break;
             case KeyCode.Q:
                 if(UIManager.Instance.skillRuntimeView.Q_skillSlot.skillInstance.TryCast()) // 쓸수있으면 
                 {
-                    pm.battleSystem.SkillExecutor(pm.character.Q_SkillInstance); // 써라
+                    pm.battleController.SkillExecutor(pm.character.Q_SkillInstance); // 써라
                 }
                 break;
             case KeyCode.W:
                 if(UIManager.Instance.skillRuntimeView.W_skillSlot.skillInstance.TryCast())
                 {
-                    pm.battleSystem.SkillExecutor(pm.character.W_SkillInstance);
+                    pm.battleController.SkillExecutor(pm.character.W_SkillInstance);
                 }
                 break;
             case KeyCode.E:
                 if(UIManager.Instance.skillRuntimeView.E_skillSlot.skillInstance.TryCast())
                 {
-                    pm.battleSystem.SkillExecutor(pm.character.E_SkillInstance);
+                    pm.battleController.SkillExecutor(pm.character.E_SkillInstance);
                 }
                 break;
             case KeyCode.R:
                 if(UIManager.Instance.skillRuntimeView.R_skillSlot.skillInstance.TryCast())
                 {
-                    pm.battleSystem.SkillExecutor(pm.character.R_SkillInstance);
+                    pm.battleController.SkillExecutor(pm.character.R_SkillInstance);
                 }
                 break;
         }
@@ -164,7 +164,7 @@ public class PlayerController : MonoBehaviour
         if (dashPressed)
         {
             dashPressed = false;
-            StartCoroutine(pm.battleSystem.utile.DashRoutine(pm.rb, pm.character.D_SkillInstance.staminaCost));
+            StartCoroutine(pm.battleController.utile.DashRoutine(pm.rb, pm.character.D_SkillInstance.staminaCost));
         }
     }
        
@@ -189,7 +189,7 @@ public class PlayerController : MonoBehaviour
 
     public void TakeDamage(float amount) => Hp -= amount;
 
-    public void Die() => pm.spriteRenderer.enabled = false;
+    public void Die() => StartCoroutine(GameManager.Instance.OnGameOver());
 
     public float manaRegen = 0f; // 스페셜 증강으로만 올릴수있는 특수한 스텟이기때문에 기본 스텟에서 제외
     public IEnumerator AutoManaRecoverCoroutine()

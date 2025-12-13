@@ -23,9 +23,9 @@ public class AgumentManager : SingleTon<AgumentManager>
         _ad = GetComponent<AgumentDatabase>();
     }
 
-    public void SetAgument(LevelSystem levelSystem)
+    public void SetAgument(LevelModel levelModel)
     {
-        if(levelSystem.Level%5 != 0)
+        if(levelModel.Level%5 != 0)
         {    
             hash.Clear();
 
@@ -59,7 +59,7 @@ public class AgumentManager : SingleTon<AgumentManager>
                 data.statAgument = _ad.statAguments[list[i]];
             }
         }
-        else if(levelSystem.Level%5 == 0)
+        else if(levelModel.Level%5 == 0)
         {
             hash.Clear();
 

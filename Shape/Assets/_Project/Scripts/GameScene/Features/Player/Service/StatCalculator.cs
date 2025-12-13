@@ -20,7 +20,7 @@ public class StatCalculator : MonoBehaviour
     {
         pm = PlayerManager.Instance;
 
-        OnCalculate += pm.playerStat.SetStatList;
+        OnCalculate += pm.statModel.SetStatList;
         OnStatChanged += pm.drain.ChangeCircleSize;
         //OnStatChanged += pm.playerController.OnApplyVital;
         OnStatChanged += UIManager.Instance.playerView.UpdateUIOnChangePlayerStat;
@@ -38,9 +38,9 @@ public class StatCalculator : MonoBehaviour
     #region  Calculator
     public void DefaultCalculate()
     {
-        _baseStat = pm.playerStat.baseStat; // 기존 스텟 딕셔너리를 가져온다.
+        _baseStat = pm.statModel.baseStat; // 기존 스텟 딕셔너리를 가져온다.
 
-        if (pm.character == null || pm.levelSystem == null)
+        if (pm.character == null || pm.levelController.levelModel == null)
         {
             Debug.LogWarning("StatCalculator: character/levelSystem null");
             return;
@@ -63,11 +63,11 @@ public class StatCalculator : MonoBehaviour
     /// <summary>
     /// 스탯 변화시 계산용 메서드
     /// </summary>
-    public void CalculateOnLevelUp(LevelSystem levelSystem)
+    public void CalculateOnLevelUp(LevelModel levelModel)
     {
-        _baseStat = pm.playerStat.baseStat; // 기존 스텟 딕셔너리를 가져온다.
+        _baseStat = pm.statModel.baseStat; // 기존 스텟 딕셔너리를 가져온다.
 
-        int L = Mathf.Max(1, levelSystem.Level);
+        int L = Mathf.Max(1, levelModel.Level);
         int idx = L - 1; // 커브 입력용
 
         // 1) 성장테이블 기반 스펙업 레벨 디자인 이후 수정
@@ -82,7 +82,7 @@ public class StatCalculator : MonoBehaviour
     
     public void CalculateOnSelecetAgument(AgumentData statAgumentData)
     {
-        _baseStat = pm.playerStat.baseStat; // 기존 스텟 딕셔너리를 가져온다.
+        _baseStat = pm.statModel.baseStat; // 기존 스텟 딕셔너리를 가져온다.
         StatType statType = statAgumentData.statAgument.statType;
         OperationType operationType = statAgumentData.statAgument.operationType;
         float value = statAgumentData.statAgument.value;
@@ -102,8 +102,8 @@ public class StatCalculator : MonoBehaviour
 
     public void Recalculate(Dictionary<StatType, int> shapeGrowthDic, Dictionary<StatType, float> shapePieceDic)
     {
-        _baseStat = pm.playerStat.baseStat;
-        _stat = pm.playerStat.stat; 
+        _baseStat = pm.statModel.baseStat;
+        _stat = pm.statModel.stat; 
 
         foreach (var kv in _baseStat)
         {

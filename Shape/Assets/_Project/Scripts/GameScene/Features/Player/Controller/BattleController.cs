@@ -5,7 +5,7 @@ using UnityEngine;
 
 
 [DefaultExecutionOrder(-20)]
-public class BattleSystem : MonoBehaviour
+public class BattleController : MonoBehaviour
 {
     [Header("평타 / 유틸")]
     [SerializeField] public AutoAttack autoAttack;
@@ -106,14 +106,14 @@ public class BattleSystem : MonoBehaviour
             var dir = (_aim - player.transform.position).normalized;
 
             // 오브젝트 생성
-            var go = pm.battleSystem.aaPool.Get();
+            var go = pm.battleController.aaPool.Get();
             AAProj aaObj = go.GetComponent<AAProj>();
 
             // 치명타 판정 체크
-            bool isCritical = UnityEngine.Random.Range(0f, 1f) < (pm.playerStat.Stat[StatType.CriticalProb] / 100f);
+            bool isCritical = UnityEngine.Random.Range(0f, 1f) < (pm.statModel.Stat[StatType.CriticalProb] / 100f);
 
             // proj정보 입력
-            aaObj.InitAAProj(pm.battleSystem.aaPool, dir, isCritical);
+            aaObj.InitAAProj(pm.battleController.aaPool, dir, isCritical);
             
             // 생성위치 및 방향 지정
             go.transform.position = gun.transform.position;

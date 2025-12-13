@@ -24,7 +24,7 @@ public struct Stat
 
 
 [DefaultExecutionOrder(-40)]
-public class PlayerStat : MonoBehaviour
+public class StatModel : MonoBehaviour
 {
     public PlayerManager pm;
     [SerializeField] private List<Stat> _statList; // 스텟 인스펙터창에 띄울려고 만듦

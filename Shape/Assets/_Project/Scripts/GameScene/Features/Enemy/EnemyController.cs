@@ -214,7 +214,7 @@ public class EnemyController : MonoBehaviour
             ItemManager.Instance.DropHeal(transform.position);
 
         int ranShapePiece = UnityEngine.Random.Range(0,99); // 모양 조각 아이템 확률
-        if(ranShapePiece < 50)
+        if(ranShapePiece < 5)
             ItemManager.Instance.DropShapePiece(transform.position);
 
         GameManager.Instance.IncreaseThreatGuage(1); // 임시로 100 넣어놓음

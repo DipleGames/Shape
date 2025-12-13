@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class AAProj : Proj
 {
-    private BattleSystem.AAPool _aaPool;
+    private BattleController.AAPool _aaPool;
     private bool _isCritical;
     
     [Header("업그레이드 정보")]
@@ -13,7 +13,7 @@ public class AAProj : Proj
     [SerializeField] float _hitCount = 0;
 
     // 생성시 초기화 작업
-    public void InitAAProj(BattleSystem.AAPool pool, Vector3 direction, bool isCritical)
+    public void InitAAProj(BattleController.AAPool pool, Vector3 direction, bool isCritical)
     {
         _aaPool = pool;
         _dir = direction.normalized;
@@ -43,8 +43,8 @@ public class AAProj : Proj
     {
         _damage = 
         _isCritical ?
-        PlayerManager.Instance.playerStat.Stat[StatType.Attack] * PlayerManager.Instance.playerStat.Stat[StatType.CriticalValue] : 
-        PlayerManager.Instance.playerStat.Stat[StatType.Attack];
+        PlayerManager.Instance.statModel.Stat[StatType.Attack] * PlayerManager.Instance.statModel.Stat[StatType.CriticalValue] : 
+        PlayerManager.Instance.statModel.Stat[StatType.Attack];
 
         // 1) 일반 적
         if (collision.CompareTag("Enemy"))

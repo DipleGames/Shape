@@ -28,6 +28,6 @@ public class ProjectileAction : SkillAction
         SkillProj skillProj= proj.GetComponent<SkillProj>();
         skillProj.Init(ctx, prm.speed, prm.isPenetrate);
         yield return new WaitForSeconds(prm.lifeTime);
-        Destroy(proj);
+        Destroy(proj); 
     }
 }

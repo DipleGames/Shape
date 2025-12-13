@@ -8,10 +8,10 @@ public class AgumentView : MonoBehaviour
     public GameObject augument_Panel;
     public Text AgumentTitle_Text;
 
-    public void UpdateAgumentUI(LevelSystem levelSystem)
+    public void UpdateAgumentUI(LevelModel levelModel)
     {
         GameObject[] agumentBtns = AgumentManager.Instance.agumentBtns;
-        if(levelSystem.Level%5 != 0)
+        if(levelModel.Level%5 != 0)
         {
             AgumentTitle_Text.text = "STAT UPGRADE";     
             for (int i = 0; i < agumentBtns.Length; i++)
@@ -25,7 +25,7 @@ public class AgumentView : MonoBehaviour
                 agumentDesc.text = data.statAgument.agumentDesc;
             }
         }
-        else if(levelSystem.Level%5 == 0)
+        else if(levelModel.Level%5 == 0)
         {
             AgumentTitle_Text.text = "SPECIAL UPGRADE";
             for (int i = 0; i < agumentBtns.Length; i++)

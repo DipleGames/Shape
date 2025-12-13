@@ -35,13 +35,13 @@ public class PlayerView : MonoBehaviour
     {
         switch (t)
         {
-            case LevelSystem levelSystem:
-                expBar.value = levelSystem.Exp / levelSystem.RequiredExp;
+            case LevelModel levelModel:
+                expBar.value = levelModel.Exp / levelModel.RequiredExp;
                 break;
             case PlayerController playerController:
-                hpBar.value = playerController.Hp / playerController.pm.playerStat.stat[StatType.MaxHp];
-                mpBar.value = playerController.Mp / playerController.pm.playerStat.stat[StatType.MaxMp];
-                staminaBar.value = playerController.Stamina / playerController.pm.playerStat.stat[StatType.MaxStamina];
+                hpBar.value = playerController.Hp / playerController.pm.statModel.stat[StatType.MaxHp];
+                mpBar.value = playerController.Mp / playerController.pm.statModel.stat[StatType.MaxMp];
+                staminaBar.value = playerController.Stamina / playerController.pm.statModel.stat[StatType.MaxStamina];
                 break;
             default:
                 break;
@@ -57,18 +57,18 @@ public class PlayerView : MonoBehaviour
                 _statTexts.Add(statText_panel.transform.GetChild(i).GetComponent<Text>());
             }
             PlayerManager pm = PlayerManager.Instance;
-            for (int i = 0; i < pm.playerStat.StatList.Count; i++)
+            for (int i = 0; i < pm.statModel.StatList.Count; i++)
             {
-                float displayedValue = Mathf.Round(pm.playerStat.StatList[i].value * 10) / 10f;
+                float displayedValue = Mathf.Round(pm.statModel.StatList[i].value * 10) / 10f;
                 _statTexts[i].text = $"{displayedValue}";
             }
         }
         else
         {
             PlayerManager pm = PlayerManager.Instance;
-            for (int i = 0; i < pm.playerStat.StatList.Count; i++)
+            for (int i = 0; i < pm.statModel.StatList.Count; i++)
             {
-                float displayedValue = Mathf.Round(pm.playerStat.StatList[i].value * 10) / 10f;
+                float displayedValue = Mathf.Round(pm.statModel.StatList[i].value * 10) / 10f;
                 _statTexts[i].text = $"{displayedValue}";
             }
         }
@@ -86,9 +86,9 @@ public class PlayerView : MonoBehaviour
         shapeGrowth_UI.SetActive(isActive);
     }
 
-    public void UpdateUIOnLevelUp(LevelSystem levelSystem)
+    public void UpdateUIOnLevelUp(LevelModel levelModel)
     {
-        level_Text.text = $"LV : {levelSystem.Level}";
+        level_Text.text = $"LV : {levelModel.Level}";
         UIManager.Instance.SwitchUI(UIManager.Instance.agumentView.augument_Panel);
         GameManager.Instance.SwitchGame();
     }

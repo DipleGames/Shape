@@ -15,6 +15,9 @@ public class UIManager : SingleTon<UIManager>
     public CoinView coinView;
     public ShapeGrowthView shapeGrowthView;
 
+    [Header("UI 패널")]
+    public GameObject gameover_Panel;
+
 
     void OnEnable()  => HideCursor();
     void OnDisable() => ShowCursor();

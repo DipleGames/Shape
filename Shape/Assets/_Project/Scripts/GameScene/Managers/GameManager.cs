@@ -129,8 +129,17 @@ public class GameManager : SingleTon<GameManager>
         ThreatGuage += amount;
     }
 
-    public void OnGameOver()
+    public void OnEnding()
     {
         SceneManager.LoadScene("EndingScene");
+    }
+
+    public IEnumerator OnGameOver()
+    {
+        UIManager.Instance.SwitchUI(UIManager.Instance.gameover_Panel);
+
+        yield return new WaitForSeconds(3f);
+        UIManager.Instance.SwitchUI(UIManager.Instance.gameover_Panel);
+        SceneManager.LoadScene("LobbyScene");
     }
 }

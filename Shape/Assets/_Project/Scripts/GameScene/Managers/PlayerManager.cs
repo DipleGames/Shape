@@ -7,7 +7,7 @@ public class PlayerManager : SingleTon<PlayerManager>
 {
     [Header("플레이어")]
     public GameObject playerPrefab;
-    public GameObject playerInstance;
+    public GameObject player;
     public Transform playerTr;
 
     [Header("캐릭터 목록")]
@@ -15,14 +15,17 @@ public class PlayerManager : SingleTon<PlayerManager>
 
     [Header("Controller")]
     public PlayerController playerController;
+    public BattleController battleController;
+    public LevelController levelController;
+    public Drain drain;
+
 
     [Header("Model")]
-    public GameObject player;
-    public BattleSystem battleSystem;
-    public LevelSystem levelSystem; 
-    public PlayerStat playerStat;
+    public StatModel statModel;
+
+
+    [Header("Service")]
     public StatCalculator statCalculator;
-    public Drain drain;
 
     
     [Header("컴퍼넌트")]
@@ -41,12 +44,13 @@ public class PlayerManager : SingleTon<PlayerManager>
 
         // 2. 그 객체의 컴퍼넌트를 담는다.
         playerController = player.GetComponent<PlayerController>();
-
-        battleSystem = player.GetComponent<BattleSystem>();
-        levelSystem = player.GetComponent<LevelSystem>();
-        playerStat = player.GetComponent<PlayerStat>();
-        statCalculator = player.GetComponent<StatCalculator>();
+        battleController = player.GetComponent<BattleController>();
+        levelController = player.GetComponent<LevelController>();
         drain = player.GetComponentInChildren<Drain>();
+
+        statModel = player.GetComponent<StatModel>();
+
+        statCalculator = player.GetComponent<StatCalculator>();
         
         spriteRenderer = player.GetComponent<SpriteRenderer>();
         rb = player.GetComponent<Rigidbody2D>();
@@ -67,9 +71,9 @@ public class PlayerManager : SingleTon<PlayerManager>
 
     void SpawnPlayer()
     {
-        playerInstance = Instantiate(playerPrefab);
-        playerTr = playerInstance.transform;
-        playerInstance.transform.position = Vector3.zero;
+        player = Instantiate(playerPrefab);
+        playerTr = player.transform;
+        player.transform.position = Vector3.zero;
     }
 
     public void InitPlayer(Character character)
@@ -78,8 +82,8 @@ public class PlayerManager : SingleTon<PlayerManager>
 
         SetSkillData();
         statCalculator.DefaultCalculate(); // 기본 스펙 세팅
-        battleSystem.aaPool.SetAAPool(character);  // aapool 만들어서 총알장전
-        playerController.OnApplyVital(playerStat.stat); // 최초 체력이랑 마나 세팅
+        battleController.aaPool.SetAAPool(character);  // aapool 만들어서 총알장전
+        playerController.OnApplyVital(statModel.stat); // 최초 체력이랑 마나 세팅
         character.weaponInstance = Instantiate(character.weapon);
         character.weaponInstance.InitWeapon(player);
         StartCoroutine(character.weaponInstance.WeaponController(player));

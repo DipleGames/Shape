@@ -9,7 +9,7 @@ public class Exp : Item
         if (collision.CompareTag("Player"))
         {
             Debug.Log($"경험치 {value}만큼 획득");
-            PlayerManager.Instance.levelSystem.AddExp(value);
+            PlayerManager.Instance.levelController.AddExp(value);
             isDrainArea = false;
             ItemManager.Instance.ReturnExp(gameObject);
         }

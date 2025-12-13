@@ -13,11 +13,11 @@ GameObject:
   - component: {fileID: 3425871384087813876}
   - component: {fileID: 5588577996275788619}
   - component: {fileID: 2318979220839730765}
+  - component: {fileID: 8467021608376094219}
   - component: {fileID: 8473182919176373085}
-  - component: {fileID: 1766114690779368094}
+  - component: {fileID: 8538606901189690766}
   - component: {fileID: 7198665747582582701}
   - component: {fileID: 4438488538846662683}
-  - component: {fileID: 8467021608376094219}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -181,6 +181,28 @@ MonoBehaviour:
   dashPressed: 0
   manaRegen: 0
   staminaRegen: 0
+  lifeLeech: 0
+--- !u!114 &8467021608376094219
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5630087314721585141}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 469b79448442c1742ae88f43a9538ede, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  autoAttack:
+    gun: {fileID: 6386175189692313793}
+  utile:
+    _dashDuration: 0.1
+    _dashDistance: 15
+  aaPool:
+    _aaObjPrefab: {fileID: 0}
+    _size: 32
+    expandable: 1
 --- !u!114 &8473182919176373085
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -194,7 +216,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _shop: {fileID: 0}
---- !u!114 &1766114690779368094
+--- !u!114 &8538606901189690766
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -203,13 +225,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 5630087314721585141}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8f7da9f038ce49042b6ee0d42d420c31, type: 3}
+  m_Script: {fileID: 11500000, guid: f0547b220782c2247a0a37219164c0dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   pm: {fileID: 0}
-  _level: 0
-  _requiredExp: 0
-  _exp: 0
 --- !u!114 &7198665747582582701
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -237,27 +256,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pm: {fileID: 0}
---- !u!114 &8467021608376094219
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5630087314721585141}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 469b79448442c1742ae88f43a9538ede, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  autoAttack:
-    gun: {fileID: 6386175189692313793}
-  utile:
-    _dashDuration: 0.1
-    _dashDistance: 15
-  aaPool:
-    _aaObjPrefab: {fileID: 0}
-    _size: 32
-    expandable: 1
 --- !u!1 &6386175189692313793
 GameObject:
   m_ObjectHideFlags: 0
