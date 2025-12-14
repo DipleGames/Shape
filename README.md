@@ -12,11 +12,17 @@
 
 ***개발 기간***: 2025.11.07 ~ 2025.11.21
 
-***개발 환경***: Engine: Unity 6000.0.61f1
 
-***Language***: C#
+## 🛠️ Tech Stack & Key Features
+- **Engine:** Unity 6000.0.61f1
+- **Languages:** C# (Scripting), **C++ (Core Logic)**
+- **Architecture:** MVC Pattern, Event-driven
+- **Tools:** DOTween, ScriptableObject
 
-***IDE***: Visual Studio Code
+## 🚀 Core Technology: C++ Interop
+이 프로젝트의 핵심인 '몬스터 스폰 좌표 연산'은 **C++ Native Plugin**으로 구현되었습니다.
+- **GC Allocation 0:** 매 프레임 메모리 할당을 방지하기 위해 Pre-allocated Buffer 포인터 전달 방식을 사용했습니다.
+- **Deterministic:** 시뮬레이션의 재현성을 위해 결정론적 난수 생성 로직을 Native 단에서 처리합니다.
 
 
 # 프로젝트 구상
