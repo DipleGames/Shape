@@ -1,4 +1,14 @@
-﻿// NativeSpawn.cpp
+﻿/*
+ * Project: Shape (Unity Native Plugin)
+ * Feature: Deterministic Spawn System
+ * 
+ * [Optimization Note]
+ * - Designed to minimize GC allocation in Unity (Managed Heap).
+ * - Uses raw pointer arithmetic to process batch data directly.
+ * - Ensures deterministic results for replay systems.
+ */
+
+// NativeSpawn.cpp
 #include <stdint.h>
 #include <math.h>
 
