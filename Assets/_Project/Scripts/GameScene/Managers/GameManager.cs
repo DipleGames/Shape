@@ -44,7 +44,7 @@ public class GameManager : SingleTon<GameManager>
             OnThreatGuageChanged?.Invoke(_threatGuage);
             if (_threatGuage >= _maxThreatGuage) 
             {
-                OnBossPhase();
+                UIManager.Instance.GetComponent<BossEntryDirector>().OnRageFull();
             }
         }
     }
@@ -80,6 +80,7 @@ public class GameManager : SingleTon<GameManager>
         PoolManager.Instance.enemyPools[0].ReturnAllEnemies(); // 적 다 리턴시키고
         _bossRoomGrid.transform.position = new Vector3(PlayerManager.Instance.player.transform.position.x, PlayerManager.Instance.player.transform.position.y + 6f, 0); // 보스방의 위치를 현재 플레이어의 위치로 위치시키고
         _bossRoomGrid.SetActive(true); // 보스방을 키고
+        UIManager.Instance.GetComponent<BossEntryDirector>().PlayBossRoomExit(PlayerManager.Instance.player.transform.position);
         SpawnManager.Instance.SpawnBoss();
         AudioManager.Instance.PlayBossBGM();
         ThreatGuage = 0f;
