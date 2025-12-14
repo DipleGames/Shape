@@ -12,11 +12,12 @@
 
 ***개발 기간***: 2025.11.07 ~ 2025.11.21
 
-***개발 환경***: Engine: Unity 6000.0.61f1
 
-***Language***: C#
-
-***IDE***: Visual Studio Code
+## 🛠️ Tech Stack & Key Features
+- **Engine:** Unity 6000.0.61f1
+- **Languages:** C# (Scripting), **C++ (Core Logic)**
+- **Architecture:** MVC Pattern, Event-driven
+- **Tools:** DOTween, ScriptableObject
 
 
 # 프로젝트 구상
