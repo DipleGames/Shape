@@ -107,6 +107,6 @@ public class SkillShopController : Shop
             idx = 4;
         }
 
-        AudioManager.Instance.PlayUpgradeSFX(); // 효과음 재생
+        AudioManager.Instance.PlaySFX(0); // 효과음 재생
     }
 }

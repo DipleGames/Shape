@@ -18,6 +18,8 @@ public class RotateWeapon : Weapon
     {
         while (true)
         {
+            if(player == null) yield break;
+
             _angle += rotateSpeed * Time.deltaTime;
 
             float angleOffset = 360f / count;

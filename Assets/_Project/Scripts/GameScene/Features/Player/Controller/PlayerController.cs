@@ -189,7 +189,7 @@ public class PlayerController : MonoBehaviour
 
     public void TakeDamage(float amount) => Hp -= amount;
 
-    public void Die() => StartCoroutine(GameManager.Instance.OnGameOver());
+    public void Die() => GameManager.Instance.OnGameOver();
 
     public float manaRegen = 0f; // 스페셜 증강으로만 올릴수있는 특수한 스텟이기때문에 기본 스텟에서 제외
     public IEnumerator AutoManaRecoverCoroutine()

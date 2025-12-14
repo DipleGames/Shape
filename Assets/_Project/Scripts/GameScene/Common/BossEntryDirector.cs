@@ -1,6 +1,7 @@
 using DG.Tweening;
 using UnityEngine;
 using System.Collections;
+using Unity.Multiplayer.Center.Common;
 
 public class BossEntryDirector : MonoBehaviour
 {
@@ -25,7 +26,15 @@ public class BossEntryDirector : MonoBehaviour
 
     private bool _triggered;
 
-    public void OnRageFull()
+    void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.T))
+        {
+            OnBossPortal();
+        } 
+    }
+
+    public void OnBossPortal()
     {
         if (_triggered) return;
         _triggered = true;
@@ -41,6 +50,8 @@ public class BossEntryDirector : MonoBehaviour
         GameObject portalGO = Instantiate(portalPrefab, pos, Quaternion.identity, portalParent);
         Transform portal = portalGO.transform;
         portal.localScale = Vector3.zero;
+
+        AudioManager.Instance.PlaySFX(2); // 효과음 재생
 
         var seq = DOTween.Sequence().SetUpdate(true);
 
@@ -74,7 +85,7 @@ public class BossEntryDirector : MonoBehaviour
         seq.AppendCallback(() => Destroy(portalGO));
 
         yield return seq.WaitForCompletion();
-
+        _triggered = false;
         // 여기서 씬 전환/페이지 전환
         GameManager.Instance.OnBossPhase();
     }

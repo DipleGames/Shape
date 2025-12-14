@@ -19,8 +19,9 @@ public class Item : MonoBehaviour
     
     protected virtual void Update()
     {
-        _rb.linearVelocity = Vector2.Lerp(_rb.linearVelocity, Vector2.zero, 3f * Time.deltaTime);
+          _rb.linearVelocity = Vector2.Lerp(_rb.linearVelocity, Vector2.zero, 3f * Time.deltaTime);
         if (!isDrainArea) return;
+        if (PlayerManager.Instance.player == null) return;
 
         Vector3 dir = (PlayerManager.Instance.player.transform.position - transform.position).normalized;
         transform.position += dir * speed * Time.deltaTime;

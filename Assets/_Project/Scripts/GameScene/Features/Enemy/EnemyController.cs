@@ -83,6 +83,8 @@ public class EnemyController : MonoBehaviour
         if (_isCharging || _isDashing)
             return;
 
+        if(target == null) return;
+
         // 사거리 안에 플레이어가 들어오면 돌진 패턴 시작
         float dist = Vector2.Distance(transform.position, target.position);
         if (isMutation && dist <= _detectRange)
@@ -133,7 +135,6 @@ public class EnemyController : MonoBehaviour
 
     void Move()
     {
-        // 방향 벡터 계산
         Vector3 dir = (target.position - transform.position).normalized;
 
         // 이동
@@ -149,9 +150,7 @@ public class EnemyController : MonoBehaviour
     void Rotate()
     {
         Vector3 dir = (target.position - transform.position).normalized;
-
         float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-
         transform.rotation = Quaternion.Euler(0f, 0f, angle - 90f);
     }
 

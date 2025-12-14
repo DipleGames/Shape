@@ -49015,6 +49015,7 @@ GameObject:
   - component: {fileID: 847960927}
   - component: {fileID: 847960926}
   - component: {fileID: 847960925}
+  - component: {fileID: 847960929}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -49117,6 +49118,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!225 &847960929
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 847960924}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &851283091
 GameObject:
   m_ObjectHideFlags: 0
@@ -50744,6 +50757,7 @@ MonoBehaviour:
   _sfxs:
   - {fileID: 8300000, guid: 0c4c7bc900befa949bb0c4b13cbe5963, type: 3}
   - {fileID: 8300000, guid: 7f165d62fb4aacb488feeedacbb878fa, type: 3}
+  - {fileID: 8300000, guid: 7890b19e957b5c24e8f80efec9db4ba8, type: 3}
   _general_BGMs:
   - {fileID: 8300000, guid: 6ab8ac3a5822c744281f0526e5bda92f, type: 3}
   _boss_BGMs:
@@ -50858,7 +50872,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.356
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -394461,6 +394475,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2031923513}
   - component: {fileID: 2031923514}
+  - component: {fileID: 2031923515}
   m_Layer: 0
   m_Name: UIManager
   m_TagString: Untagged
@@ -394503,6 +394518,31 @@ MonoBehaviour:
   coinView: {fileID: 2091332050}
   shapeGrowthView: {fileID: 129124419}
   gameover_Panel: {fileID: 315966296}
+--- !u!114 &2031923515
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2031923512}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dcf6e38b3a6e0fc4daccb9299700b74e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  portalPrefab: {fileID: 1442878854446188469, guid: e533d6e950523314d8395561b6e17950, type: 3}
+  portalParent: {fileID: 0}
+  portalOpenTime: 0.35
+  portalHoldTime: 0.15
+  suckTime: 0.55
+  portalScale: {x: 2.2, y: 2.2, z: 2.2}
+  playerSpin: 540
+  sinkDown: 0.35
+  popOutTime: 0.55
+  popUp: 0.45
+  portalCloseTime: 0.25
+  exitSpin: 360
 --- !u!1 &2044986255
 GameObject:
   m_ObjectHideFlags: 0

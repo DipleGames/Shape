@@ -38,7 +38,7 @@ public class AAShopController : Shop
         CoinManager.Instance.SubtractCoin(_aaShop.rangeUpgradeCost);
         _aaShop.rangeUpgradeCost += 50;
         OnRangeUpgradeCostChanged.Invoke(_aaShop.rangeUpgradeCost);
-        AudioManager.Instance.PlayUpgradeSFX(); // 효과음 재생
+        AudioManager.Instance.PlaySFX(0); // 효과음 재생
     }
 
     public void OnClikedUpgradePenetrationBtn()
@@ -48,7 +48,7 @@ public class AAShopController : Shop
         CoinManager.Instance.SubtractCoin(_aaShop.penetrationUpgradeCost);
         _aaShop.penetrationUpgradeCost += 50;
         OnPenetrationUpgradeCostChanged.Invoke(_aaShop.penetrationUpgradeCost);
-        AudioManager.Instance.PlayUpgradeSFX(); // 효과음 재생
+        AudioManager.Instance.PlaySFX(0); // 효과음 재생
     }
     
 }

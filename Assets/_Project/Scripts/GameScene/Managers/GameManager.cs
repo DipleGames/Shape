@@ -44,7 +44,7 @@ public class GameManager : SingleTon<GameManager>
             OnThreatGuageChanged?.Invoke(_threatGuage);
             if (_threatGuage >= _maxThreatGuage) 
             {
-                UIManager.Instance.GetComponent<BossEntryDirector>().OnRageFull();
+                UIManager.Instance.GetComponent<BossEntryDirector>().OnBossPortal();
             }
         }
     }
@@ -151,10 +151,15 @@ public class GameManager : SingleTon<GameManager>
         SceneManager.LoadScene("EndingScene");
     }
 
-    public IEnumerator OnGameOver()
+    public void OnGameOver()
+    {
+        StartCoroutine(OnGameOverCoroutine());
+    }
+
+    public IEnumerator OnGameOverCoroutine()
     {
         UIManager.Instance.SwitchUI(UIManager.Instance.gameover_Panel);
-
+        Destroy(PlayerManager.Instance.player);
         yield return new WaitForSeconds(3f);
         UIManager.Instance.SwitchUI(UIManager.Instance.gameover_Panel);
         SceneManager.LoadScene("LobbyScene");

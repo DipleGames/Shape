@@ -17,16 +17,11 @@ public class AudioManager : SingleTon<AudioManager>
         PlayGeneralBGM();
     }
 
-    public void PlayUpgradeSFX()
+    public void PlaySFX(int idx)
     {
-        sfxSource.PlayOneShot(_sfxs[0], 0.5f);
+        sfxSource.PlayOneShot(_sfxs[idx], 0.3f);
     }
 
-    public void PlayEnemyHitSFX()
-    {
-        sfxSource.PlayOneShot(_sfxs[1], 0.5f);
-    }
-    
     public void PlayGeneralBGM()
     {
         if(GameManager.Instance.gameState == GameState.General)

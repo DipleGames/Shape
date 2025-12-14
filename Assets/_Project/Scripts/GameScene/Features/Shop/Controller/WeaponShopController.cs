@@ -32,6 +32,6 @@ public class WeaponShopController : Shop
         CoinManager.Instance.SubtractCoin(_weaponShop.weaponUpgradeCost);
         _weaponShop.weaponUpgradeCost += 10;
         OnWeaponUpgradeCostChanged.Invoke(_weaponShop.weaponUpgradeCost);
-        AudioManager.Instance.PlayUpgradeSFX(); // 효과음 재생
+        AudioManager.Instance.PlaySFX(0); // 효과음 재생
     }
 }
