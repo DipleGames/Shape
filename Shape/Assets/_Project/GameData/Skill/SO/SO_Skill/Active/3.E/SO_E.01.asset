@@ -34,7 +34,7 @@ MonoBehaviour:
     - rid: 2773896810579624028
       type: {class: DamageAction/DamageParams, ns: , asm: Assembly-CSharp}
       data:
-        damage: 0.1
+        damage: 1
     - rid: 2773896810579624029
       type: {class: AuraAction/AuraParams, ns: , asm: Assembly-CSharp}
       data:

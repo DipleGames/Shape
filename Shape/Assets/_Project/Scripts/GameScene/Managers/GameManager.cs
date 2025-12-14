@@ -76,6 +76,7 @@ public class GameManager : SingleTon<GameManager>
         {
             gtm.GetComponent<TilemapRenderer>().enabled = false;
         }
+        ClearItem();
         PoolManager.Instance.enemyPools[0].ReturnAllEnemies(); // 적 다 리턴시키고
         _bossRoomGrid.transform.position = new Vector3(PlayerManager.Instance.player.transform.position.x, PlayerManager.Instance.player.transform.position.y + 6f, 0); // 보스방의 위치를 현재 플레이어의 위치로 위치시키고
         _bossRoomGrid.SetActive(true); // 보스방을 키고
@@ -110,6 +111,21 @@ public class GameManager : SingleTon<GameManager>
         var objs = GameObject.FindGameObjectsWithTag("BossPattern");
         foreach (var obj in objs)
             Destroy(obj);
+    }
+
+    public void ClearItem()
+    {
+        var healObjs = GameObject.FindGameObjectsWithTag("Hp");
+        foreach (var obj in healObjs)
+            ItemManager.Instance.ReturnHeal(obj);
+
+        var expObjs = GameObject.FindGameObjectsWithTag("Exp");
+        foreach (var obj in expObjs)
+            ItemManager.Instance.ReturnExp(obj);
+
+        var shapePieceObjs = GameObject.FindGameObjectsWithTag("ShapePiece");
+        foreach (var obj in shapePieceObjs)
+            ItemManager.Instance.ReturnShapePiece(obj);
     }
 
     void ClearShopUI()

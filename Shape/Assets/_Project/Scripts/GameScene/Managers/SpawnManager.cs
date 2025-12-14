@@ -1,7 +1,9 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine.InputSystem.LowLevel;
+using UnityEngine.SocialPlatforms;
+
+
 
 public class SpawnManager : SingleTon<SpawnManager>
 {
@@ -40,6 +42,8 @@ public class SpawnManager : SingleTon<SpawnManager>
 
     void Start()
     {
+        _spawnSeed = (uint)UnityEngine.Random.Range(1, int.MaxValue);
+
         float halfH = _targetCamera.orthographicSize;                // 세로 반쪽
         float halfW = _targetCamera.orthographicSize * _targetCamera.aspect; // 가로 반쪽
         
@@ -73,51 +77,42 @@ public class SpawnManager : SingleTon<SpawnManager>
                 if (GameManager.Instance.gameState == GameState.General && _maxLive > poolManager.enemyPools[0].active.Count)
                 {
                     TrySpawnEnemy();
+
                 }
             }
             yield return wait;
         }
     }
 
+    private NativeSpawn.Vec2[] _candidateOffsets = new NativeSpawn.Vec2[16];
+    private uint _spawnSeed;
     private void TrySpawnEnemy()
     {
         if (poolManager.enemyPools.Count == 0 || playerManager.playerTr == null) return;
 
-        // 디버그 기록 초기화
         _debugTried.Clear();
         _debugAccepted.Clear();
         _debugHasChosen = false;
 
-        var pool = poolManager.enemyPools[Random.Range(0, poolManager.enemyPools.Count)];
+        var pool = poolManager.enemyPools[UnityEngine.Random.Range(0, poolManager.enemyPools.Count)];
 
         const int MAX_TRIES = 16;
-        Vector3 spawnPos = playerManager.playerTr.position;
+        NativeSpawn.GenerateOffsetsExactTries(_innerRectHalfSize, _outerRectHalfSize, MAX_TRIES, ref _spawnSeed, _candidateOffsets);
+
+        Vector3 playerPos = playerManager.playerTr.position;
+        Vector3 spawnPos = playerPos;
         bool found = false;
 
         for (int i = 0; i < MAX_TRIES; i++)
         {
-            // 1) 플레이어 기준 큰 직사각형 안에서 랜덤 위치
-            Vector2 local = new Vector2(
-                Random.Range(-_outerRectHalfSize.x, _outerRectHalfSize.x),
-                Random.Range(-_outerRectHalfSize.y, _outerRectHalfSize.y)
-            );
+            var off = _candidateOffsets[i];
 
-            // 2) 작은 직사각형 안이면(카메라 근처) 버림
-            if (Mathf.Abs(local.x) < _innerRectHalfSize.x &&
-                Mathf.Abs(local.y) < _innerRectHalfSize.y)
-            {
+            if (float.IsNaN(off.x))
                 continue;
-            }
 
-            Vector3 candidate = playerManager.playerTr.position + (Vector3)local;
-            candidate.z = 0f;
+            Vector3 candidate = new Vector3(playerPos.x + off.x, playerPos.y + off.y, 0f);
 
             _debugTried.Add(candidate);
-
-            // 카메라 밖 보장을 innerRect로 이미 어느 정도 하고 있으니까
-            // 필요하면 IsOutsideCameraView는 빼도 되고, 불안하면 한 번 더 체크해도 됨.
-            // if (!IsOutsideCameraView(candidate))
-            //     continue;
 
             if (IsEnemyTooClose(candidate))
             {
@@ -141,13 +136,68 @@ public class SpawnManager : SingleTon<SpawnManager>
             break;
         }
 
-
         if (!found) return;
 
         var enemy = pool.Get(EnemyManager.Instance.SelectEnemy(), PoolManager.Instance.enemyPoolsParent.transform);
         enemy.transform.position = spawnPos;
         enemy.transform.rotation = Quaternion.identity;
     }
+
+    // private void TrySpawnEnemy()
+    // {
+    //     if(poolManager.enemyPools.Count == 0 || playerManager.playerTr == null) return;
+
+    //     // 디버그 기록 초기화
+    //     _debugTried.Clear();
+    //     _debugAccepted.Clear();
+    //     _debugHasChosen = false;
+
+    //     var pool = poolManager.enemyPools[UnityEngine.Random.Range(0,poolManager.enemyPools.Count)];
+
+    //     const int MAX_TRIES = 16;
+    //     bool found = false;
+    //     Vector3 spawnPos = playerManager.playerTr.position;
+
+    //     for(int i=0; i<MAX_TRIES; i++)
+    //     {
+    //         Vector2 local = new Vector2(Random.Range(-_outerRectHalfSize.x, _outerRectHalfSize.x), Random.Range(-_outerRectHalfSize.y, _outerRectHalfSize.y));
+    //         if(Mathf.Abs(local.x) < _innerRectHalfSize.x && Mathf.Abs(local.y) < _innerRectHalfSize.y)
+    //         {
+    //             continue;
+    //         }
+
+    //         Vector3 candidate = playerManager.playerTr.position + (Vector3)local;
+    //         candidate.z = 0f;
+
+    //         _debugTried.Add(candidate);
+
+    //         if(IsEnemyTooClose(candidate))
+    //         {
+    //             if(TryOffsetFromEnemies(candidate, out var abjusted))
+    //             {
+    //                 spawnPos = abjusted;
+    //                 found = true;
+    //                 _debugAccepted.Add(abjusted);
+    //                 _debugChosenPos = abjusted;
+    //                 _debugHasChosen = true;
+    //                 break;
+    //             }
+    //             continue;
+    //         }
+    //         spawnPos = candidate; 
+    //         found = true; 
+    //         _debugAccepted.Add(candidate);
+    //         _debugChosenPos = candidate; 
+    //         _debugHasChosen = true; 
+    //         break;
+    //     }
+    //     if(!found) return;
+
+    //     var enemy = pool.Get(EnemyManager.Instance.SelectEnemy(), PoolManager.Instance.enemyPoolsParent.transform);
+    //     enemy.transform.position = spawnPos;
+    //     enemy.transform.rotation = Quaternion.identity;
+    // }
+
 
     private bool IsOutsideCameraView(Vector3 worldPos)
     {
