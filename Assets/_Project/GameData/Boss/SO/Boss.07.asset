@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Boss.07
   m_EditorClassIdentifier: 
   sprite: {fileID: 21300000, guid: cb0ad69a9d54aee45903e230f0fd7275, type: 2}
-  bossHp: 200000
+  bossHp: 1000000
   patterns:
   - pattern: {fileID: 11400000, guid: 8132104e53fd8ac4c91b9ae518679024, type: 2}
     parameters:
@@ -24,6 +24,9 @@ MonoBehaviour:
   - pattern: {fileID: 11400000, guid: 4d6b017d28e36b641836f51af29eb912, type: 2}
     parameters:
       rid: 2773897005173047299
+  - pattern: {fileID: 11400000, guid: 97108e4606fcba04db8c4bec27fcaa4f, type: 2}
+    parameters:
+      rid: 4255242294033645666
   references:
     version: 2
     RefIds:
@@ -55,3 +58,8 @@ MonoBehaviour:
         - {x: -10, y: 0, z: 0}
         - {x: 0, y: 10, z: 0}
         - {x: 0, y: -10, z: 0}
+    - rid: 4255242294033645666
+      type: {class: SpawnPattern/SpawnParams, ns: , asm: Assembly-CSharp}
+      data:
+        bossMinionPrefab: {fileID: 7089994590353789598, guid: 82198ec3634600d4c89e400835c69755, type: 3}
+        count: 2

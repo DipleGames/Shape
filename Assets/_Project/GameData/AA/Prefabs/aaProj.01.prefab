@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2332149852228750725}
   m_Layer: 10
   m_Name: aaProj.01
-  m_TagString: Untagged
+  m_TagString: aaProj
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -178,3 +178,7 @@ MonoBehaviour:
   _projSpeed: 20
   _lifetime: 0.5
   _damage: 0
+  rangeUgCount: 1
+  penetrationUgCount: 1
+  _realLifetime: 0
+  _hitCount: 0

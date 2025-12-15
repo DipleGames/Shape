@@ -77,7 +77,7 @@ public class AAProj : Proj
         }
     }
 
-    void Despawn()
+    public void Despawn()
     {
         if (_aaPool != null) _aaPool.Return(gameObject);
         else gameObject.SetActive(false);
