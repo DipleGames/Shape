@@ -2,8 +2,8 @@
 # 유니티 1인 개발 프로젝트
 
 <div style="display: flex; gap: 16px;">
-  <img width="450" src="https://github.com/user-attachments/assets/7ac3dbb4-1595-4767-85a2-2859f006b3d9" />
-  <img width="450" src="https://github.com/user-attachments/assets/2a5c2559-e0ec-4f9a-a8bf-15286f0d86c5" />
+  <img width="400" src="https://github.com/user-attachments/assets/7ac3dbb4-1595-4767-85a2-2859f006b3d9" />
+  <img width="400" src="https://github.com/user-attachments/assets/2a5c2559-e0ec-4f9a-a8bf-15286f0d86c5" />
 </div>
 
 # 1. 프로젝트 소개 
@@ -41,8 +41,8 @@
   
 ### 참고 게임
 <div style="display: flex; gap: 16px;">
-  <img width="450" src="https://github.com/user-attachments/assets/1326ec2d-42ad-4dad-8183-e3f773e527c1" />
-  <img width="450" src="https://github.com/user-attachments/assets/f3513ffa-9b9c-4013-ac69-6ccbdabe4c4e" />
+  <img width="400" src="https://github.com/user-attachments/assets/1326ec2d-42ad-4dad-8183-e3f773e527c1" />
+  <img width="400" src="https://github.com/user-attachments/assets/f3513ffa-9b9c-4013-ac69-6ccbdabe4c4e" />
 </div>
 
 ### 폴더 구조
