@@ -105,6 +105,5 @@ SHAPE는 도형의 모양만을 이용하여 만든 간단한 컨셉의 2D 로�
                 └── 📜 LobbyManager.cs
 </pre>
 
-# 게임 구조도
-### Scene
+# 게임 시스템 구조 아키텍처
 <img width="10852" height="6160" alt="image" src="https://github.com/user-attachments/assets/d938c648-7f34-48e3-b621-fa2c3bad3aa9" />
