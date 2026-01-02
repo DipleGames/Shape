@@ -15,7 +15,7 @@ SHAPE는 도형의 모양만을 이용하여 만든 간단한 컨셉의 2D 로�
 
 ## 🛠️ Tech Stack & Key Features
 - **Engine:** Unity 6000.0.61f1
-- **Languages:** C# (Scripting), **C++ (Core Logic)**
+- **Languages:** C#, **C++ (Core Logic)**
 - **Architecture:** MVC Pattern, Event-driven
 - **Tools:** DOTween, ScriptableObject
 
