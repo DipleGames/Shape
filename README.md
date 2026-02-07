@@ -39,7 +39,7 @@ SHAPE는 도형의 모양만을 이용하여 만든 간단한 컨셉의 2D 로�
   5. 이렇게 성장해나가며 최종단계 7스테이지를 격파하는 간단한 게임입니다.
 
   
-### 참고 게임
+### 참고 게임 (세피리아)
 <div style="display: flex; gap: 16px;">
   <img width="400" src="https://github.com/user-attachments/assets/1326ec2d-42ad-4dad-8183-e3f773e527c1" />
   <img width="400" src="https://github.com/user-attachments/assets/f3513ffa-9b9c-4013-ac69-6ccbdabe4c4e" />
