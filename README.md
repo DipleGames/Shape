@@ -1,5 +1,5 @@
 # SHAPE
-# 유니티 / C# [1인 개발(클라이언트) 프로젝트]
+# UNITY / C# [1인 개발(클라이언트) 프로젝트]
 
 <div style="display: flex; gap: 16px;">
   <img width="400" src="https://github.com/user-attachments/assets/7ac3dbb4-1595-4767-85a2-2859f006b3d9" />
